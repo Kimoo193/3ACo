@@ -1112,13 +1112,29 @@ footer {
   .hp { border-right: none !important; border-left: none !important; border-bottom: 1px solid var(--border); }
   .hp:last-child { border-bottom: none; }
 }
+
+/* ===== Projects section styles (matches site cards) ===== */
+.projects { background: var(--bg2); border-top: 1px solid var(--border); }
+.projects-controls { display:flex; gap:12px; align-items:center; margin-bottom:18px; }
+.projects-controls select { padding:8px 12px; border-radius:8px; border:1px solid var(--border); background:var(--surface); color:var(--txt); font-size:14px; }
+.projects-controls label { color:var(--muted); font-weight:700; font-size:13px; }
+.proj-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: var(--shadow); transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease); }
+.proj-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.22); }
+.proj-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--head); margin-bottom: 8px; }
+.proj-meta { font-size: 13px; color: var(--muted); }
+[data-lang="ar"] .proj-title { font-family: 'Tajawal', sans-serif !important; font-weight: 800; }
+
+@media (max-width: 960px) {
+  .projects-controls { flex-direction: column; align-items: flex-start; }
+  .proj-card { padding: 14px; }
+}
 </style>
 </head>
 <body>
 
 <!-- ══ NAV ══ -->
 <nav style="box-shadow: none;">
-  <a href="#" class="nav-brand">
+  <a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#" class="nav-brand">
     <span class="nav-wordmark"><b>3</b>ACo</span>
     <span class="nav-sep"></span>
     <span class="nav-sub">
@@ -1128,16 +1144,16 @@ footer {
   </a>
 
   <ul class="nav-links">
-    <li><a href="#about"><span class="en-i">About</span><span class="ar-i">عن الشركة</span></a></li>
-    <li><a href="#services"><span class="en-i">Services</span><span class="ar-i">الخدمات</span></a></li>
-    <li><a href="#partners"><span class="en-i">Partners</span><span class="ar-i">الشركاء</span></a></li>
-    <li><a href="#contact"><span class="en-i">Contact</span><span class="ar-i">تواصل</span></a></li>
+    <li><a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#about"><span class="en-i">About</span><span class="ar-i">عن الشركة</span></a></li>
+    <li><a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#services"><span class="en-i">Services</span><span class="ar-i">الخدمات</span></a></li>
+    <li><a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#partners"><span class="en-i">Partners</span><span class="ar-i">الشركاء</span></a></li>
+    <li><a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#contact"><span class="en-i">Contact</span><span class="ar-i">تواصل</span></a></li>
   </ul>
 
   <div class="nav-controls">
     <div class="lang-toggle">
-      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" id="btn-ar" onclick="setLang('ar')">ع</button>
+      <button class="lang-btn active" id="btn-en" onclick="setLang(&#39;en&#39;)">EN</button>
+      <button class="lang-btn" id="btn-ar" onclick="setLang(&#39;ar&#39;)">ع</button>
     </div>
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
   </div>
@@ -1175,12 +1191,12 @@ footer {
     </p>
 
     <div class="hero-ctas">
-      <a href="#services" class="cta-primary">
+      <a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#services" class="cta-primary">
         <span class="en-i">Explore Our Services</span>
         <span class="ar-i">استعرض خدماتنا</span>
         <span>→</span>
       </a>
-      <a href="#contact" class="cta-sec">
+      <a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#contact" class="cta-sec">
         <span class="en-i">Get in Touch</span>
         <span class="ar-i">تواصل معنا</span>
       </a>
@@ -1370,6 +1386,133 @@ footer {
       <span class="sc-badge">Poles · High-Mast · Fabrication</span></div>
   </div>
 </section>
+<!-- ══ PROJECTS (NEW) ══ -->
+<section id="projects" class="projects">
+  <div class="sec-eyebrow"><span class="en-i">Projects</span><span class="ar-i">مشاريعنا</span></div>
+  <h2 class="sec-title">
+    <span class="en-i">Our <em>Work</em></span>
+    <span class="ar-i"><em>أعمالنا</em></span>
+  </h2>
+
+
+  <div class="projects-grid" id="projects-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;">
+    <!-- Group 1 (2018-2019) — Summit / EMC / UBC -->
+    <div class="proj-card" data-year="2018-2019" data-company="Summit">
+      <div class="proj-title en-i">Al Mansoura 5 (Administrative Capital) — Summit Technology Solutions</div>
+      <div class="proj-title ar-i" style="display:none">المنصورة 5 (العاصمة الإدارية) — شركة Summit</div>
+      <div class="proj-meta en-i">2018-2019 · Summit</div>
+      <div class="proj-meta ar-i" style="display:none">2018-2019 · شركة Summit</div>
+    </div>
+    <div class="proj-card" data-year="2018-2019" data-company="EMC">
+      <div class="proj-title en-i">Petrojet (Nasr City) — EMC</div>
+      <div class="proj-title ar-i" style="display:none">شركة بتروجيت (مدينة نصر) — EMC</div>
+      <div class="proj-meta en-i">2018-2019 · EMC</div>
+      <div class="proj-meta ar-i" style="display:none">2018-2019 · EMC</div>
+    </div>
+    <div class="proj-card" data-year="2018-2019" data-company="Summit">
+      <div class="proj-title en-i">Police Academy (Fifth Settlement) — Summit</div>
+      <div class="proj-title ar-i" style="display:none">أكاديمية الشرطة (التجمع الخامس) — Summit</div>
+      <div class="proj-meta en-i">2018-2019 · Summit</div>
+      <div class="proj-meta ar-i" style="display:none">2018-2019 · Summit</div>
+    </div>
+    <div class="proj-card" data-year="2018-2019" data-company="UBC">
+      <div class="proj-title en-i">Ministry of Education (Administrative Capital) — UBC</div>
+      <div class="proj-title ar-i" style="display:none">وزارة التربية والتعليم (العاصمة الإدارية) — UBC</div>
+      <div class="proj-meta en-i">2018-2019 · UBC</div>
+      <div class="proj-meta ar-i" style="display:none">2018-2019 · UBC</div>
+    </div>
+    <div class="proj-card" data-year="2018-2019" data-company="UBC">
+      <div class="proj-title en-i">Administrative Capital Company — UBC</div>
+      <div class="proj-title ar-i" style="display:none">شركة العاصمة الإدارية — UBC</div>
+      <div class="proj-meta en-i">2018-2019 · UBC</div>
+      <div class="proj-meta ar-i" style="display:none">2018-2019 · UBC</div>
+    </div>
+    <div class="proj-card" data-year="2018-2019" data-company="UBC">
+      <div class="proj-title en-i">Ministry of Higher Education & Scientific Research — UBC</div>
+      <div class="proj-title ar-i" style="display:none">وزارة التعليم العالي والبحث العلمي (العاصمة الإدارية) — UBC</div>
+      <div class="proj-meta en-i">2018-2019 · UBC</div>
+      <div class="proj-meta ar-i" style="display:none">2018-2019 · UBC</div>
+    </div>
+    <div class="proj-card" data-year="2018-2019" data-company="UBC">
+      <div class="proj-title en-i">Ministry of Tourism & Antiquities (Administrative Capital) — UBC</div>
+      <div class="proj-title ar-i" style="display:none">وزارة السياحة والآثار (العاصمة الإدارية) — UBC</div>
+      <div class="proj-meta en-i">2018-2019 · UBC</div>
+      <div class="proj-meta ar-i" style="display:none">2018-2019 · UBC</div>
+    </div>
+
+    <!-- Group 2 (2020-2023) — FIBER Misr / Nordex / Orascom / TATAS -->
+    <div class="proj-card" data-year="2020-2023" data-company="FIBER Misr">
+      <div class="proj-title en-i">Ministry of Planning & Economic Development — FIBER Misr</div>
+      <div class="proj-title ar-i" style="display:none">وزارة التخطيط والتنمية الاقتصادية — FIBER Misr</div>
+      <div class="proj-meta en-i">2020 · FIBER Misr</div>
+      <div class="proj-meta ar-i" style="display:none">2020 · FIBER Misr</div>
+    </div>
+    <div class="proj-card" data-year="2020-2023" data-company="FIBER Misr">
+      <div class="proj-title en-i">Ministry of Electricity & Renewable Energy — FIBER Misr</div>
+      <div class="proj-title ar-i" style="display:none">وزارة الكهرباء والطاقة المتجددة — FIBER Misr</div>
+      <div class="proj-meta en-i">2020 · FIBER Misr</div>
+      <div class="proj-meta ar-i" style="display:none">2020 · FIBER Misr</div>
+    </div>
+    <div class="proj-card" data-year="2020-2023" data-company="FIBER Misr">
+      <div class="proj-title en-i">Ministry of Health & Population — FIBER Misr</div>
+      <div class="proj-title ar-i" style="display:none">وزارة الصحة والسكان — FIBER Misr</div>
+      <div class="proj-meta en-i">2021 · FIBER Misr</div>
+      <div class="proj-meta ar-i" style="display:none">2021 · FIBER Misr</div>
+    </div>
+    <div class="proj-card" data-year="2020-2023" data-company="Nordex">
+      <div class="proj-title en-i">Military Entity — Phase 1 — Nordex (TPC)</div>
+      <div class="proj-title ar-i" style="display:none">الكيان العسكري المرحلة الأولى — Nordex(TPC)</div>
+      <div class="proj-meta en-i">2020/2022 · Nordex</div>
+      <div class="proj-meta ar-i" style="display:none">2020/2022 · Nordex</div>
+    </div>
+    <div class="proj-card" data-year="2020-2023" data-company="ElRowad">
+      <div class="proj-title en-i">Ministry of Awqaf (Administrative Capital) — ElRowad</div>
+      <div class="proj-title ar-i" style="display:none">وزارة الأوقاف (العاصمة الإدارية) — الرواد</div>
+      <div class="proj-meta en-i">2021 · ElRowad</div>
+      <div class="proj-meta ar-i" style="display:none">2021 · الرواد</div>
+    </div>
+    <div class="proj-card" data-year="2020-2023" data-company="Orascom">
+      <div class="proj-title en-i">Kent College West Cairo — Orascom Group</div>
+      <div class="proj-title ar-i" style="display:none">Kent College West Cairo — Orascom Group</div>
+      <div class="proj-meta en-i">2022 · Orascom</div>
+      <div class="proj-meta ar-i" style="display:none">2022 · Orascom</div>
+    </div>
+    <div class="proj-card" data-year="2020-2023" data-company="TATAS">
+      <div class="proj-title en-i">Colleges & Institutes (Military Entity) — TATAS</div>
+      <div class="proj-title ar-i" style="display:none">الكليات والمعاهد (الكيان العسكري) — TATAS</div>
+      <div class="proj-meta en-i">2023 · TATAS</div>
+      <div class="proj-meta ar-i" style="display:none">2023 · TATAS</div>
+    </div>
+
+    <!-- Group 3 (2023) — TeleTech / ACT / Raya -->
+    <div class="proj-card" data-year="2023" data-company="TeleTech">
+      <div class="proj-title en-i">Colleges & Institutes (Military Entity) — TeleTech</div>
+      <div class="proj-title ar-i" style="display:none">الكليات والمعاهد (الكيان العسكري) — TeleTech</div>
+      <div class="proj-meta en-i">2023 · TeleTech</div>
+      <div class="proj-meta ar-i" style="display:none">2023 · TeleTech</div>
+    </div>
+    <div class="proj-card" data-year="2023" data-company="ACT">
+      <div class="proj-title en-i">Medical Complex (Suez) — ACT</div>
+      <div class="proj-title ar-i" style="display:none">مجمع طبي (السويس) — ACT</div>
+      <div class="proj-meta en-i">2023 · ACT</div>
+      <div class="proj-meta ar-i" style="display:none">2023 · ACT</div>
+    </div>
+    <div class="proj-card" data-year="2023" data-company="Alaa Saber">
+      <div class="proj-title en-i">National University (Suez) — Alaa Saber</div>
+      <div class="proj-title ar-i" style="display:none">الجامعة الأهلية (السويس) — علاء صابر</div>
+      <div class="proj-meta en-i">2023 · Alaa Saber</div>
+      <div class="proj-meta ar-i" style="display:none">2023 · علاء صابر</div>
+    </div>
+    <div class="proj-card" data-year="2023" data-company="Raya">
+      <div class="proj-title en-i">National Bank Branch (Cairo — Giza) — Raya</div>
+      <div class="proj-title ar-i" style="display:none">فرع البنك الأهلي (القاهرة — الجيزة) — Raya</div>
+      <div class="proj-meta en-i">2023 · Raya</div>
+      <div class="proj-meta ar-i" style="display:none">2023 · Raya</div>
+    </div>
+  </div>
+
+  
+</section>
 
 <!-- ══ SYSTEMS BANNER ══ -->
 <div class="banner">
@@ -1493,13 +1636,7 @@ footer {
           <div class="ci-val">01010998027</div>
         </div>
       </div>
-      <div class="ci" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.53s, transform 0.5s 1.53s;">
-        <div class="ci-icon">📞</div>
-        <div>
-          <div class="ci-lbl en">Al-Hawari — Mobile</div><div class="ci-lbl ar" style="display:none">الهواري — موبايل</div>
-          <div class="ci-val">015 52 49 80 27</div>
-        </div>
-      </div>
+      
     </div>
 
     <div class="person-card">
@@ -1510,6 +1647,20 @@ footer {
       <div class="person-contacts">
         <div class="pcl"><span>📞</span><span>01117874632</span></div>
         <div class="pcl"><span>✉️</span><span>elhwarya139@gmail.com</span></div>
+        <div class="pcl">
+          <span>📍</span>
+          <span class="en-i">Maadi · Cairo · Egypt</span>
+          <span class="ar-i">المعادي · القاهرة · مصر</span>
+        </div>
+      </div>
+    </div>
+    <div class="person-card" style="margin-top:18px;">
+      <div class="person-pill en">Project Manager · 3ACo Egypt</div>
+      <div class="person-pill ar" style="display:none">مدير المشروع · 3ACo مصر</div>
+      <div class="person-name en">Ibrahim Shuaib</div>
+      <div class="person-name ar" style="display:none">ابراهيم شعيب</div>
+      <div class="person-contacts">
+        <div class="pcl"><span>📞</span><span>01033063211</span></div>
         <div class="pcl">
           <span>📍</span>
           <span class="en-i">Maadi · Cairo · Egypt</span>
