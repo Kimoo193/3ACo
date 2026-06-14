@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="dark" data-lang="en">
+<html lang="en" dir="ltr" data-lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,7 @@
 
   <style>
     /* ════════════════════════════════════
-       DESIGN TOKENS & SYSTEM
+       DESIGN TOKENS & SYSTEM (LOCKED DARK)
     ════════════════════════════════════ */
     :root {
       --blue: #1a9fd4;
@@ -23,9 +23,8 @@
       --gold-soft: rgba(200, 169, 110, 0.15);
       --ease: cubic-bezier(0.25, 0.8, 0.25, 1);
       --t: 0.35s;
-    }
 
-    [data-theme="dark"] {
+      /* Cinematic Dark Palette */
       --bg: #09090b;
       --bg2: #0e0e11;
       --surface: #121216;
@@ -39,22 +38,6 @@
       --shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
       --chip-bg: rgba(20, 20, 25, 0.6);
       --dot: rgba(255, 255, 255, 0.02);
-    }
-
-    [data-theme="light"] {
-      --bg: #fafafa;
-      --bg2: #f3f5f8;
-      --surface: #ffffff;
-      --surface2: #f0f3f7;
-      --border: rgba(0, 0, 0, 0.06);
-      --border-b: rgba(26, 159, 212, 0.15);
-      --txt: #3e4a56;
-      --muted: #8d9da9;
-      --head: #11151e;
-      --nav-bg: rgba(250, 250, 250, 0.85);
-      --shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
-      --chip-bg: rgba(255, 255, 255, 0.7);
-      --dot: rgba(0, 0, 0, 0.03);
     }
 
     /* Base Normalization */
@@ -74,7 +57,6 @@
       background: var(--bg);
       color: var(--txt);
       overflow-x: hidden;
-      transition: background var(--t) var(--ease), color var(--t) var(--ease);
       -webkit-font-smoothing: antialiased;
     }
 
@@ -117,7 +99,6 @@
       pointer-events: none;
       background: radial-gradient(circle at 20% 30%, var(--blue-soft) 0%, transparent 40%),
                   radial-gradient(circle at 80% 70%, rgba(200, 169, 110, 0.02) 0%, transparent 45%);
-      transition: background var(--t);
     }
 
     /* Custom Custom Cursor Orb */
@@ -185,7 +166,6 @@
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid var(--border);
-      transition: background var(--t), border-color var(--t);
     }
 
     [data-lang="ar"] nav { flex-direction: row-reverse; }
@@ -204,7 +184,6 @@
       font-style: italic;
       color: var(--head);
       letter-spacing: -0.5px;
-      transition: color var(--t);
     }
 
     .nav-wordmark b {
@@ -224,7 +203,6 @@
       width: 1px;
       height: 18px;
       background: var(--border);
-      transition: background var(--t);
     }
 
     .nav-sub {
@@ -232,7 +210,6 @@
       font-weight: 600;
       color: var(--muted);
       letter-spacing: 0.5px;
-      transition: color var(--t);
     }
 
     .nav-links {
@@ -248,7 +225,6 @@
       font-weight: 600;
       color: var(--muted);
       text-decoration: none;
-      transition: color var(--t);
       position: relative;
     }
 
@@ -304,24 +280,6 @@
       background: var(--blue);
       color: #ffffff;
       box-shadow: 0 2px 10px var(--blue-glow);
-    }
-
-    .theme-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      transition: background var(--t), border-color var(--t), transform 0.2s;
-    }
-    .theme-btn:hover {
-      transform: scale(1.05);
-      border-color: var(--blue);
     }
 
     /* ════════════════════════════════════
@@ -398,7 +356,7 @@
       border-radius: 50%;
     }
 
-    /* Enhanced Hero H1 Typography */
+    /* Hero H1 Typography */
     .hero-h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(42px, 6vw, 78px);
@@ -407,7 +365,6 @@
       letter-spacing: -1px;
       color: var(--head);
       margin-bottom: 28px;
-      transition: color var(--t);
     }
 
     [data-lang="ar"] .hero-h1 {
@@ -448,7 +405,6 @@
       max-width: 580px;
       margin-bottom: 40px;
       font-weight: 400;
-      transition: color var(--t);
     }
 
     [data-lang="ar"] .hero-desc {
@@ -568,7 +524,6 @@
       font-weight: 700;
       color: var(--head);
       margin-bottom: 6px;
-      transition: color var(--t);
     }
 
     [data-lang="ar"] .hp-name {
@@ -580,7 +535,6 @@
       font-size: 12.5px;
       color: var(--muted);
       line-height: 1.6;
-      transition: color var(--t);
     }
 
     /* Floating Geometric Abstract Objects */
@@ -620,7 +574,6 @@
       font-size: 12px;
       color: var(--muted);
       letter-spacing: 0.5px;
-      transition: color var(--t);
     }
 
     .hero-scroll-line {
@@ -686,7 +639,6 @@
       letter-spacing: -0.5px;
       color: var(--head);
       margin-bottom: 48px;
-      transition: color var(--t);
     }
 
     [data-lang="ar"] .sec-title {
@@ -741,7 +693,6 @@
       color: var(--muted);
       margin-bottom: 24px;
       font-weight: 400;
-      transition: color var(--t);
     }
 
     .about-copy p + p {
@@ -1156,7 +1107,7 @@
     }
 
     /* ════════════════════════════════════
-       CONTACT & COMMUNICATIONS (RESTRUCTURED)
+       CONTACT & COMMUNICATIONS
     ════════════════════════════════════ */
     .contact {
       border-top: 1px solid var(--border);
@@ -1524,7 +1475,6 @@
         <button class="lang-btn active" id="btn-en" onclick="switchLanguage('en')">EN</button>
         <button class="lang-btn" id="btn-ar" onclick="switchLanguage('ar')">عربي</button>
       </div>
-      <button class="theme-btn" id="theme-toggler" onclick="changeTheme()">🌙</button>
     </div>
   </nav>
 
@@ -1546,7 +1496,6 @@
         </span>
       </div>
 
-      <!-- Redesigned Typographic Balance -->
       <h1 class="hero-h1 en">
         Smart Building<br>
         <span class="light-title">&amp; Security</span> <em class="gold-glow">Solutions</em>
@@ -1820,7 +1769,7 @@
     </div>
   </section>
 
-  <!-- ══ SYSTEMS BANNER (DYNAMIC HORIZONTAL RIBBON) ══ -->
+  <!-- ══ SYSTEMS BANNER ══ -->
   <div class="banner" id="banner-trigger">
     <div class="banner-head en">Full Light Current<br>Network Coverage</div>
     <div class="banner-head ar">تغطية شاملة لجميع<br>منظومات التيار الخفيف</div>
@@ -1913,7 +1862,7 @@
 
   <div class="divider"></div>
 
-  <!-- ══ CONTACT & COMMUNICATIONS (RESTRUCTURED) ══ -->
+  <!-- ══ CONTACT & COMMUNICATIONS ══ -->
   <section class="contact" id="contact">
     <div class="sec-eyebrow"><span class="en-i">Communications</span><span class="ar-i">قنوات الاتصال</span></div>
     <h2 class="sec-title">
@@ -1922,7 +1871,7 @@
     </h2>
 
     <div class="contact-grid">
-      <!-- Left Column: Location & General Channels (Optimized Grid Items) -->
+      <!-- Left Column: Location & General Channels -->
       <div class="c-list">
         <!-- L1 -->
         <div class="ci-card">
@@ -1969,7 +1918,7 @@
 
       <!-- Right Column: Dual-Profile Executive Grid -->
       <div class="executive-showcase">
-        <!-- CARD 1: GENERAL MANAGER (NEW) -->
+        <!-- CARD 1: GENERAL MANAGER -->
         <div class="person-card gm-accent">
           <div>
             <div class="person-pill en">General Manager · 3ACo</div>
@@ -2043,17 +1992,9 @@
     gsap.registerPlugin(ScrollTrigger);
 
     /* ════════════════════════════════════
-       THEME MANAGEMENT & PRESET STATE
+       LANGUAGE MANAGEMENT & PRESET STATE
     ════════════════════════════════════ */
     const docHtml = document.documentElement;
-
-    function changeTheme() {
-      const isDark = docHtml.dataset.theme === 'dark';
-      const nextTheme = isDark ? 'light' : 'dark';
-      docHtml.dataset.theme = nextTheme;
-      document.getElementById('theme-toggler').textContent = nextTheme === 'dark' ? '🌙' : '☀️';
-      localStorage.setItem('3aco-theme', nextTheme);
-    }
 
     function switchLanguage(lang) {
       docHtml.dataset.lang = lang;
@@ -2066,10 +2007,7 @@
 
     // Initialize state
     (function initAppState() {
-      const localTheme = localStorage.getItem('3aco-theme') || 'dark';
       const localLang = localStorage.getItem('3aco-lang') || 'en';
-      docHtml.dataset.theme = localTheme;
-      document.getElementById('theme-toggler').textContent = localTheme === 'dark' ? '🌙' : '☀️';
       switchLanguage(localLang);
     })();
 
