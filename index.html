@@ -1,1740 +1,2371 @@
 <!DOCTYPE html>
-<!-- saved from url=(0104)file:///home/kareem-mohamed/Music/3ACo%20%E2%80%94%20Smart%20Building%20&%20Engineering%20Solutions.html -->
-<html lang="en" dir="ltr" data-theme="dark" data-lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3ACo — Smart Building &amp; Engineering Solutions</title>
-
-<!--
-  Typography strategy:
-  EN Display  → Playfair Display  (elegant editorial serif — feels designed, NOT AI)
-  EN Body     → Nunito            (round, warm, approachable — not clinical)
-  AR Display  → Tajawal           (natural Arabic, warm weight variety)
--->
-<link href="./3ACo — Smart Building &amp; Engineering Solutions_files/css2" rel="stylesheet">
-
-<style>
-/* ════════════════════════════════════
-   DESIGN TOKENS
-════════════════════════════════════ */
-:root {
-  --blue:      #1a9fd4;
-  --blue-2:    rgba(26,159,212,0.10);
-  --blue-3:    rgba(26,159,212,0.20);
-  --ease:      cubic-bezier(0.25, 0.8, 0.25, 1);
-  --t:         0.32s;
-}
-
-[data-theme="dark"] {
-  --bg:        #09090b;
-  --bg2:       #0f1015;
-  --surface:   #141519;
-  --surface2:  #1a1b21;
-  --border:    rgba(255,255,255,0.07);
-  --border-b:  rgba(26,159,212,0.18);
-  --txt:       #c8d0da;
-  --muted:     #525d6a;
-  --head:      #f1f3f6;
-  --nav-bg:    rgba(9,9,11,0.82);
-  --shadow:    0 20px 60px rgba(0,0,0,0.55);
-  --chip-bg:   #141519;
-  --dot:       rgba(255,255,255,0.04);
-}
-
-[data-theme="light"] {
-  --bg:        #fafafa;
-  --bg2:       #f2f4f7;
-  --surface:   #ffffff;
-  --surface2:  #edf1f6;
-  --border:    rgba(0,0,0,0.07);
-  --border-b:  rgba(26,159,212,0.20);
-  --txt:       #3d4a56;
-  --muted:     #98aab8;
-  --head:      #111620;
-  --nav-bg:    rgba(250,250,250,0.88);
-  --shadow:    0 20px 60px rgba(0,0,0,0.09);
-  --chip-bg:   #edf1f6;
-  --dot:       rgba(0,0,0,0.04);
-}
-
-/* ════════════════════════════════════
-   BASE
-════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Nunito', sans-serif;
-  background: var(--bg);
-  color: var(--txt);
-  overflow-x: hidden;
-  transition: background var(--t) var(--ease), color var(--t) var(--ease);
-  -webkit-font-smoothing: antialiased;
-}
-
-[data-lang="ar"] body,
-[data-lang="ar"] * {
-  font-family: 'Tajawal', sans-serif !important;
-}
-
-/* i18n */
-.en { display: block; }
-.ar { display: none; }
-.en-i { display: inline; }
-.ar-i { display: none; }
-[data-lang="ar"] .en  { display: none !important; }
-[data-lang="ar"] .ar  { display: block !important; }
-[data-lang="ar"] .en-i { display: none !important; }
-[data-lang="ar"] .ar-i { display: inline !important; }
-[data-lang="ar"]       { direction: rtl; }
-
-/* grain overlay */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='0.025'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
-}
-
-/* ════════════════════════════════════
-   NAV
-════════════════════════════════════ */
-nav {
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 clamp(20px, 5vw, 88px);
-  height: 66px;
-  background: var(--nav-bg);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border-bottom: 1px solid var(--border);
-  transition: background var(--t), border-color var(--t);
-}
-
-[data-lang="ar"] nav { flex-direction: row-reverse; }
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  text-decoration: none;
-}
-
-/* Logo: Playfair italic looks designed, not AI */
-.nav-wordmark {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 700;
-  font-style: italic;
-  color: var(--head);
-  letter-spacing: -0.3px;
-  transition: color var(--t);
-}
-
-.nav-wordmark b {
-  font-style: normal;
-  font-weight: 800;
-  color: var(--blue);
-}
-
-[data-lang="ar"] .nav-wordmark {
-  font-family: 'Tajawal', sans-serif !important;
-  font-style: normal;
-  font-size: 20px;
-}
-
-.nav-sep {
-  width: 1px;
-  height: 18px;
-  background: var(--border);
-  transition: background var(--t);
-}
-
-.nav-sub {
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--muted);
-  letter-spacing: 0.3px;
-  transition: color var(--t);
-}
-
-.nav-links {
-  display: flex;
-  gap: 36px;
-  list-style: none;
-}
-
-.nav-links a {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover { color: var(--blue); }
-
-.nav-controls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.lang-toggle {
-  display: flex;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-  transition: background var(--t), border-color var(--t);
-}
-
-.lang-btn {
-  padding: 6px 13px;
-  font-size: 12px;
-  font-weight: 600;
-  background: transparent;
-  color: var(--muted);
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-  font-family: inherit;
-}
-
-.lang-btn.active { background: var(--blue); color: #fff; }
-
-.theme-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  transition: background var(--t), border-color var(--t), transform 0.2s;
-}
-.theme-btn:hover { transform: scale(1.1); }
-
-/* ════════════════════════════════════
-   HERO
-════════════════════════════════════ */
-.hero {
-  position: relative;
-  min-height: 100svh;
-  display: flex;
-  align-items: center;
-  padding: 110px clamp(20px, 5vw, 88px) 80px;
-  overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 65% 55% at 75% 45%, rgba(26,159,212,0.07) 0%, transparent 65%),
-    var(--bg);
-  transition: background var(--t);
-}
-
-/* subtle dot grid */
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 800px;
-}
-
-[data-lang="ar"] .hero-inner { text-align: right; }
-
-/* small label above title — no ALL CAPS, no giant letter-spacing */
-.hero-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 30px;
-}
-
-.hero-kicker-bar {
-  width: 28px;
-  height: 2px;
-  background: var(--blue);
-  border-radius: 2px;
-  flex-shrink: 0;
-}
-
-.hero-kicker-text {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--blue);
-  letter-spacing: 0.2px;
-}
-
-[data-lang="ar"] .hero-kicker { flex-direction: row-reverse; }
-
-/*
-  KEY CHANGE: Playfair Display for headings.
-  Serif + italic mix = feels editorial, human, crafted.
-  Not geometric, not condensed, not AI-template.
-*/
-.hero-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(46px, 7vw, 96px);
-  font-weight: 800;
-  line-height: 1.07;
-  letter-spacing: -1px;
-  color: var(--head);
-  margin-bottom: 28px;
-  transition: color var(--t);
-}
-
-[data-lang="ar"] .hero-h1 {
-  font-family: 'Tajawal', sans-serif !important;
-  font-size: clamp(38px, 6vw, 78px);
-  line-height: 1.3;
-  letter-spacing: 0;
-  font-weight: 800;
-}
-
-.hero-h1 .em {
-  color: var(--blue);
-  font-style: italic;
-}
-
-.hero-h1 .light {
-  font-weight: 400;
-  font-style: italic;
-  color: var(--muted);
-}
-
-.hero-desc {
-  font-size: 17px;
-  line-height: 1.82;
-  color: var(--muted);
-  max-width: 540px;
-  margin-bottom: 48px;
-  font-weight: 400;
-  transition: color var(--t);
-}
-
-[data-lang="ar"] .hero-desc { font-size: 16px; }
-
-.hero-ctas {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-[data-lang="ar"] .hero-ctas { flex-direction: row-reverse; }
-
-.cta-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 13px 28px;
-  background: var(--blue);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  text-decoration: none;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-
-.cta-primary:hover {
-  background: #178abf;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 32px rgba(26,159,212,0.28);
-}
-
-.cta-sec {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 13px 28px;
-  background: transparent;
-  color: var(--txt);
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, var(--t);
-}
-
-.cta-sec:hover { border-color: var(--blue); color: var(--blue); }
-
-/* pillars row below hero desc */
-.hero-pillars {
-  display: flex;
-  gap: 0;
-  margin-top: 64px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-  max-width: 640px;
-  background: var(--surface);
-  transition: background var(--t), border-color var(--t);
-}
-
-[data-lang="ar"] .hero-pillars { flex-direction: row-reverse; }
-
-.hp {
-  flex: 1;
-  padding: 22px 24px;
-  border-right: 1px solid var(--border);
-  transition: background 0.25s, border-color var(--t);
-}
-
-.hp:last-child { border-right: none; }
-[data-lang="ar"] .hp:first-child { border-right: none; border-left: 1px solid var(--border); }
-[data-lang="ar"] .hp:last-child { border-left: none; }
-
-.hp:hover { background: var(--surface2); }
-
-.hp-icon { font-size: 20px; margin-bottom: 8px; }
-
-.hp-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--head);
-  margin-bottom: 3px;
-  transition: color var(--t);
-}
-
-[data-lang="ar"] .hp-name {
-  font-family: 'Tajawal', sans-serif !important;
-  font-size: 15px;
-}
-
-.hp-txt {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.5;
-  transition: color var(--t);
-}
-
-/* scroll indicator */
-.hero-scroll {
-  position: absolute;
-  bottom: 36px;
-  left: clamp(20px, 5vw, 88px);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 12px;
-  color: var(--muted);
-  letter-spacing: 0.5px;
-  animation: fadeUp 1s var(--ease) 0.8s both;
-  transition: color var(--t);
-}
-
-.hero-scroll-line {
-  width: 32px;
-  height: 1px;
-  background: var(--muted);
-  animation: expandLine 1.2s var(--ease) 1s both;
-}
-
-@keyframes expandLine {
-  from { width: 0; }
-  to   { width: 32px; }
-}
-
-[data-lang="ar"] .hero-scroll { left: auto; right: clamp(20px, 5vw, 88px); flex-direction: row-reverse; }
-
-/* ════════════════════════════════════
-   SECTIONS
-════════════════════════════════════ */
-section {
-  padding: 96px clamp(20px, 5vw, 88px);
-  position: relative;
-  transition: background var(--t);
-}
-
-.sec-eyebrow {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--blue);
-  letter-spacing: 1px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.sec-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 20px;
-  height: 1.5px;
-  background: var(--blue);
-  border-radius: 2px;
-}
-
-[data-lang="ar"] .sec-eyebrow { flex-direction: row-reverse; }
-[data-lang="ar"] .sec-eyebrow::before { display: none; }
-[data-lang="ar"] .sec-eyebrow::after {
-  content: '';
-  display: inline-block;
-  width: 20px;
-  height: 1.5px;
-  background: var(--blue);
-  border-radius: 2px;
-}
-
-.sec-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(30px, 4vw, 52px);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.5px;
-  color: var(--head);
-  margin-bottom: 52px;
-  transition: color var(--t);
-}
-
-[data-lang="ar"] .sec-title {
-  font-family: 'Tajawal', sans-serif !important;
-  font-size: clamp(26px, 3.5vw, 44px);
-  letter-spacing: 0;
-  line-height: 1.35;
-}
-
-.sec-title em {
-  font-style: italic;
-  color: var(--blue);
-}
-
-/* ════════════════════════════════════
-   ABOUT
-════════════════════════════════════ */
-.about {
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.about-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
-}
-
-[data-lang="ar"] .about-wrap { direction: rtl; }
-
-.about-copy p {
-  font-size: 15.5px;
-  line-height: 1.9;
-  color: var(--muted);
-  margin-bottom: 16px;
-  font-weight: 400;
-  transition: color var(--t);
-}
-
-.about-copy p + p { margin-bottom: 0; }
-
-.about-nums {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 36px;
-  border: 1px solid var(--border);
-  transition: background var(--t), border-color var(--t);
-}
-
-.anum {
-  background: var(--surface);
-  padding: 22px 20px;
-  transition: background var(--t);
-}
-
-/* Numbers in Playfair = feels premium, not AI-robotic */
-.anum-n {
-  font-family: 'Playfair Display', serif;
-  font-size: 34px;
-  font-weight: 700;
-  color: var(--blue);
-  line-height: 1;
-  margin-bottom: 5px;
-}
-
-.anum-l {
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 500;
-  transition: color var(--t);
-}
-
-/* Values list */
-.value-row {
-  display: flex;
-  gap: 18px;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--border);
-  align-items: flex-start;
-  transition: border-color var(--t);
-}
-.value-row:first-of-type { border-top: 1px solid var(--border); }
-[data-lang="ar"] .value-row { flex-direction: row-reverse; }
-
-.vnum {
-  font-family: 'Playfair Display', serif;
-  font-size: 13px;
-  font-weight: 400;
-  font-style: italic;
-  color: var(--blue);
-  opacity: 0.7;
-  min-width: 24px;
-  margin-top: 2px;
-}
-
-[data-lang="ar"] .vnum { font-family: 'Tajawal', sans-serif !important; font-style: normal; }
-
-.v-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--head);
-  margin-bottom: 4px;
-  transition: color var(--t);
-}
-
-[data-lang="ar"] .v-name { font-family: 'Tajawal', sans-serif !important; font-size: 17px; }
-
-.v-desc {
-  font-size: 13.5px;
-  line-height: 1.75;
-  color: var(--muted);
-  font-weight: 400;
-  transition: color var(--t);
-}
-
-/* ════════════════════════════════════
-   SERVICES
-════════════════════════════════════ */
-.svc-intro {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 40px;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-[data-lang="ar"] .svc-intro { flex-direction: row-reverse; }
-
-.svc-intro .sec-title { margin-bottom: 0; }
-
-.svc-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: background var(--t), border-color var(--t);
-}
-
-.sc {
-  background: var(--surface);
-  padding: 34px 30px;
-  position: relative;
-  overflow: hidden;
-  cursor: default;
-  transition: background 0.25s, var(--t);
-}
-
-.sc:hover { background: var(--surface2); }
-
-/* hover: thin blue top border */
-.sc::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--blue), rgba(26,159,212,0.3));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s var(--ease);
-}
-.sc:hover::before { transform: scaleX(1); }
-
-.sc-icon { font-size: 26px; margin-bottom: 14px; display: block; }
-
-/* Playfair for card titles = feels intentional */
-.sc-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--head);
-  margin-bottom: 10px;
-  line-height: 1.3;
-  transition: color var(--t);
-}
-
-[data-lang="ar"] .sc-name { font-family: 'Tajawal', sans-serif !important; font-size: 17px; }
-
-.sc-desc {
-  font-size: 13.5px;
-  line-height: 1.78;
-  color: var(--muted);
-  margin-bottom: 16px;
-  font-weight: 400;
-  transition: color var(--t);
-}
-
-.sc-badge {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--blue);
-  background: var(--blue-2);
-  border: 1px solid var(--blue-3);
-  padding: 4px 10px;
-  border-radius: 4px;
-  display: inline-block;
-  transition: background var(--t), border-color var(--t);
-}
-
-/* ════════════════════════════════════
-   SYSTEMS BANNER
-════════════════════════════════════ */
-.banner {
-  background: var(--blue);
-  padding: 60px clamp(20px, 5vw, 88px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
-  position: relative;
-  overflow: hidden;
-}
-
-/* decorative text bg */
-.banner::before {
-  content: '3A';
-  position: absolute;
-  right: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: 'Playfair Display', serif;
-  font-size: 200px;
-  font-weight: 800;
-  font-style: italic;
-  color: rgba(0,0,0,0.06);
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-}
-
-[data-lang="ar"] .banner { flex-direction: row-reverse; }
-[data-lang="ar"] .banner::before { right: auto; left: 40px; font-style: normal; }
-
-.banner-head {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(22px, 3.2vw, 38px);
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.25;
-  position: relative;
-  z-index: 1;
-}
-
-[data-lang="ar"] .banner-head {
-  font-family: 'Tajawal', sans-serif !important;
-  font-size: clamp(20px, 3vw, 34px);
-  line-height: 1.45;
-}
-
-.banner-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  position: relative;
-  z-index: 1;
-}
-
-.sys-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: rgba(0,0,0,0.14);
-  border: 1px solid rgba(0,0,0,0.18);
-  border-radius: 100px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: rgba(0,0,0,0.78);
-  letter-spacing: 0.2px;
-  backdrop-filter: blur(4px);
-}
-
-/* ════════════════════════════════════
-   PARTNERS
-════════════════════════════════════ */
-.partners {
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-}
-
-.partners-grid {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 80px;
-  align-items: start;
-}
-
-[data-lang="ar"] .partners-grid { direction: rtl; }
-
-.partners-side-desc {
-  font-size: 14.5px;
-  line-height: 1.85;
-  color: var(--muted);
-  margin-top: 12px;
-  font-weight: 400;
-  transition: color var(--t);
-}
-
-.pcat { margin-bottom: 36px; }
-
-.pcat-name {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--muted);
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  padding-bottom: 10px;
-  margin-bottom: 14px;
-  border-bottom: 1px solid var(--border);
-  transition: color var(--t), border-color var(--t);
-}
-
-[data-lang="ar"] .pcat-name {
-  letter-spacing: 0;
-  text-transform: none;
-  text-align: right;
-}
-
-.prow { display: flex; flex-wrap: wrap; gap: 8px; }
-
-.pchip {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 8px 16px;
-  background: var(--chip-bg);
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--txt);
-  transition: border-color 0.2s, color 0.2s, background 0.2s, var(--t);
-  cursor: default;
-}
-
-.pchip:hover {
-  border-color: var(--blue);
-  color: var(--blue);
-  background: var(--blue-2);
-}
-
-.pchip-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--blue);
-  flex-shrink: 0;
-}
-
-/* ════════════════════════════════════
-   CONTACT
-════════════════════════════════════ */
-.contact { border-top: 1px solid var(--border); }
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
-}
-
-[data-lang="ar"] .contact-grid { direction: rtl; }
-
-.c-list { display: flex; flex-direction: column; gap: 26px; }
-
-.ci {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-}
-
-[data-lang="ar"] .ci { flex-direction: row-reverse; text-align: right; }
-
-.ci-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 9px;
-  background: var(--blue-2);
-  border: 1px solid var(--blue-3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  flex-shrink: 0;
-  transition: background var(--t), border-color var(--t);
-}
-
-.ci-lbl {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--blue);
-  letter-spacing: 0.5px;
-  margin-bottom: 3px;
-  text-transform: uppercase;
-  transition: color var(--t);
-}
-
-[data-lang="ar"] .ci-lbl { letter-spacing: 0; text-transform: none; }
-
-.ci-val {
-  font-size: 14.5px;
-  font-weight: 500;
-  color: var(--txt);
-  transition: color var(--t);
-}
-
-/* Person card */
-.person-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 40px 38px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: background var(--t), border-color var(--t), box-shadow var(--t);
-}
-
-.person-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--blue-2) 0%, transparent 55%);
-  pointer-events: none;
-}
-
-/* watermark in Playfair italic */
-.person-card::after {
-  content: '3A';
-  position: absolute;
-  bottom: -22px;
-  right: 10px;
-  font-family: 'Playfair Display', serif;
-  font-size: 140px;
-  font-style: italic;
-  font-weight: 800;
-  color: rgba(26,159,212,0.04);
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-}
-
-[data-lang="ar"] .person-card { text-align: right; }
-[data-lang="ar"] .person-card::after { right: auto; left: 10px; font-style: normal; }
-
-.person-pill {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--blue);
-  border: 1px solid var(--blue-3);
-  background: var(--blue-2);
-  padding: 5px 12px;
-  border-radius: 100px;
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 1;
-  letter-spacing: 0.3px;
-  transition: background var(--t), border-color var(--t);
-}
-
-/* Person name in Playfair = feels real, not a template */
-.person-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--head);
-  letter-spacing: -0.3px;
-  margin-bottom: 28px;
-  line-height: 1.2;
-  position: relative;
-  z-index: 1;
-  transition: color var(--t);
-}
-
-[data-lang="ar"] .person-name {
-  font-family: 'Tajawal', sans-serif !important;
-  letter-spacing: 0;
-}
-
-.person-contacts {
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-  position: relative;
-  z-index: 1;
-}
-
-.pcl {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13.5px;
-  color: var(--muted);
-  transition: color var(--t);
-}
-
-[data-lang="ar"] .pcl { flex-direction: row-reverse; }
-
-/* ════════════════════════════════════
-   DIVIDER
-════════════════════════════════════ */
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-b) 30%, var(--border-b) 70%, transparent);
-}
-
-/* ════════════════════════════════════
-   FOOTER
-════════════════════════════════════ */
-footer {
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-  padding: 32px clamp(20px, 5vw, 88px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-  transition: background var(--t), border-color var(--t);
-}
-
-[data-lang="ar"] footer { flex-direction: row-reverse; }
-
-.footer-brand {
-  font-family: 'Playfair Display', serif;
-  font-size: 19px;
-  font-weight: 700;
-  font-style: italic;
-  color: var(--head);
-  transition: color var(--t);
-}
-
-.footer-brand b {
-  font-style: normal;
-  color: var(--blue);
-}
-
-[data-lang="ar"] .footer-brand {
-  font-family: 'Tajawal', sans-serif !important;
-  font-style: normal;
-}
-
-.footer-motto {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--blue);
-  letter-spacing: 0.3px;
-}
-
-.footer-copy {
-  font-size: 12px;
-  color: var(--muted);
-  transition: color var(--t);
-}
-
-/* ════════════════════════════════════
-   ANIMATIONS
-════════════════════════════════════ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(22px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.hero-kicker  { animation: fadeUp 0.6s var(--ease) 0.10s both; }
-.hero-h1      { animation: fadeUp 0.6s var(--ease) 0.20s both; }
-.hero-desc    { animation: fadeUp 0.6s var(--ease) 0.30s both; }
-.hero-ctas    { animation: fadeUp 0.6s var(--ease) 0.40s both; }
-.hero-pillars { animation: fadeUp 0.6s var(--ease) 0.52s both; }
-
-/* ════════════════════════════════════
-   RESPONSIVE
-════════════════════════════════════ */
-@media (max-width: 960px) {
-  .about-wrap, .contact-grid, .partners-grid { grid-template-columns: 1fr; gap: 48px; }
-  .nav-links { display: none; }
-  .hero-pillars { max-width: 100%; }
-  .hp { padding: 18px 14px; }
-}
-
-@media (max-width: 600px) {
-  .hero, section { padding-left: 20px; padding-right: 20px; }
-  .hero { padding-top: 90px; }
-  section { padding-top: 72px; padding-bottom: 72px; }
-  .banner { padding: 48px 20px; }
-  footer { padding: 26px 20px; }
-  nav { padding: 0 20px; }
-  .hero-pillars { flex-direction: column; gap: 0; }
-  .hp { border-right: none !important; border-left: none !important; border-bottom: 1px solid var(--border); }
-  .hp:last-child { border-bottom: none; }
-}
-
-/* ===== Projects section styles (matches site cards) ===== */
-.projects { background: var(--bg2); border-top: 1px solid var(--border); }
-.projects-controls { display:flex; gap:12px; align-items:center; margin-bottom:18px; }
-.projects-controls select { padding:8px 12px; border-radius:8px; border:1px solid var(--border); background:var(--surface); color:var(--txt); font-size:14px; }
-.projects-controls label { color:var(--muted); font-weight:700; font-size:13px; }
-.proj-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: var(--shadow); transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease); }
-.proj-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.22); }
-.proj-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--head); margin-bottom: 8px; }
-.proj-meta { font-size: 13px; color: var(--muted); }
-[data-lang="ar"] .proj-title { font-family: 'Tajawal', sans-serif !important; font-weight: 800; }
-
-@media (max-width: 960px) {
-  .projects-controls { flex-direction: column; align-items: flex-start; }
-  .proj-card { padding: 14px; }
-}
-</style>
+<html lang="en" dir="ltr" data-theme="dark" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3ACo — Smart Building &amp; Engineering Solutions</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ════════════════════════════════════
+       DESIGN TOKENS & SYSTEM
+    ════════════════════════════════════ */
+    :root {
+      --blue: #1a9fd4;
+      --blue-glow: rgba(26, 159, 212, 0.4);
+      --blue-soft: rgba(26, 159, 212, 0.08);
+      --blue-medium: rgba(26, 159, 212, 0.18);
+      --gold: #c8a96e; /* Premium Micro-accents */
+      --gold-soft: rgba(200, 169, 110, 0.15);
+      --ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+      --t: 0.35s;
+    }
+
+    [data-theme="dark"] {
+      --bg: #09090b;
+      --bg2: #0e0e11;
+      --surface: #121216;
+      --surface2: #181920;
+      --border: rgba(255, 255, 255, 0.05);
+      --border-b: rgba(26, 159, 212, 0.15);
+      --txt: #c8d0da;
+      --muted: #6e7a8a;
+      --head: #f1f3f6;
+      --nav-bg: rgba(9, 9, 11, 0.75);
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      --chip-bg: rgba(20, 20, 25, 0.6);
+      --dot: rgba(255, 255, 255, 0.02);
+    }
+
+    [data-theme="light"] {
+      --bg: #fafafa;
+      --bg2: #f3f5f8;
+      --surface: #ffffff;
+      --surface2: #f0f3f7;
+      --border: rgba(0, 0, 0, 0.06);
+      --border-b: rgba(26, 159, 212, 0.15);
+      --txt: #3e4a56;
+      --muted: #8d9da9;
+      --head: #11151e;
+      --nav-bg: rgba(250, 250, 250, 0.85);
+      --shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+      --chip-bg: rgba(255, 255, 255, 0.7);
+      --dot: rgba(0, 0, 0, 0.03);
+    }
+
+    /* Base Normalization */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      overflow-x: hidden;
+      transition: background var(--t) var(--ease), color var(--t) var(--ease);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Arabic Layout Override */
+    [data-lang="ar"] body,
+    [data-lang="ar"] * {
+      font-family: 'Tajawal', sans-serif !important;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-b);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--blue);
+    }
+
+    /* Ambient Effects Overlay */
+    .noise-grain {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='0.015'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Dynamic Gradient Mesh Container */
+    .mesh-gradient-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -3;
+      pointer-events: none;
+      background: radial-gradient(circle at 20% 30%, var(--blue-soft) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 70%, rgba(200, 169, 110, 0.02) 0%, transparent 45%);
+      transition: background var(--t);
+    }
+
+    /* Custom Custom Cursor Orb */
+    .cursor-orb {
+      width: 20px;
+      height: 20px;
+      background: var(--blue);
+      border-radius: 50%;
+      position: fixed;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 10000;
+      mix-blend-mode: screen;
+      filter: blur(3px);
+      box-shadow: 0 0 15px var(--blue), 0 0 30px var(--blue);
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.1s ease;
+    }
+
+    @media (max-width: 960px) {
+      .cursor-orb { display: none !important; }
+    }
+
+    /* Language and RTL Visibility Switch Utilities */
+    .en { display: block; }
+    .ar { display: none; }
+    .en-i { display: inline; }
+    .ar-i { display: none; }
+
+    [data-lang="ar"] .en { display: none !important; }
+    [data-lang="ar"] .ar { display: block !important; }
+    [data-lang="ar"] .en-i { display: none !important; }
+    [data-lang="ar"] .ar-i { display: inline !important; }
+    [data-lang="ar"] { direction: rtl; }
+
+    /* Progress Bar */
+    .scroll-progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      z-index: 1000;
+      background: transparent;
+    }
+    .scroll-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--gold));
+      width: 0%;
+    }
+
+    /* ════════════════════════════════════
+       NAVIGATION (STICKY / BACKDROP)
+    ════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 5vw, 88px);
+      height: 72px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--t), border-color var(--t);
+    }
+
+    [data-lang="ar"] nav { flex-direction: row-reverse; }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+    }
+
+    .nav-wordmark {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--head);
+      letter-spacing: -0.5px;
+      transition: color var(--t);
+    }
+
+    .nav-wordmark b {
+      font-style: normal;
+      font-weight: 800;
+      color: var(--blue);
+      text-shadow: 0 0 10px var(--blue-soft);
+    }
+
+    [data-lang="ar"] .nav-wordmark {
+      font-family: 'Tajawal', sans-serif !important;
+      font-style: normal;
+      font-size: 22px;
+    }
+
+    .nav-sep {
+      width: 1px;
+      height: 18px;
+      background: var(--border);
+      transition: background var(--t);
+    }
+
+    .nav-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      transition: color var(--t);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    [data-lang="ar"] .nav-links { flex-direction: row-reverse; }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--t);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--blue);
+      transition: width var(--t) var(--ease);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    [data-lang="ar"] .nav-controls { flex-direction: row-reverse; }
+
+    .lang-toggle {
+      display: flex;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      padding: 2px;
+    }
+
+    .lang-btn {
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      background: transparent;
+      color: var(--muted);
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background var(--t) var(--ease), color var(--t);
+    }
+
+    .lang-btn.active {
+      background: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 2px 10px var(--blue-glow);
+    }
+
+    .theme-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: background var(--t), border-color var(--t), transform 0.2s;
+    }
+    .theme-btn:hover {
+      transform: scale(1.05);
+      border-color: var(--blue);
+    }
+
+    /* ════════════════════════════════════
+       HERO (3D CANVAS FIELD BACKGROUND)
+    ════════════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px clamp(20px, 5vw, 88px) 80px;
+      overflow: hidden;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px);
+      background-size: 32px 32px;
+      z-index: -2;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 10;
+      max-width: 860px;
+    }
+
+    [data-lang="ar"] .hero-inner {
+      text-align: right;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    [data-lang="ar"] .hero-kicker {
+      flex-direction: row-reverse;
+    }
+
+    .hero-kicker-bar {
+      width: 32px;
+      height: 2px;
+      background: var(--blue);
+      border-radius: 2px;
+    }
+
+    .hero-kicker-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-kicker-text .gold-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    /* Enhanced Hero H1 Typography */
+    .hero-h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 6vw, 78px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      color: var(--head);
+      margin-bottom: 28px;
+      transition: color var(--t);
+    }
+
+    [data-lang="ar"] .hero-h1 {
+      font-family: 'Tajawal', sans-serif !important;
+      font-size: clamp(36px, 5vw, 68px);
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .hero-h1 em {
+      font-family: 'Playfair Display', serif;
+      color: var(--blue);
+      font-style: italic;
+      font-weight: 700;
+      text-shadow: 0 0 15px var(--blue-soft);
+    }
+
+    [data-lang="ar"] .hero-h1 em {
+      font-family: 'Tajawal', sans-serif !important;
+      font-style: normal;
+    }
+
+    .hero-h1 .light-title {
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .hero-h1 .gold-glow {
+      color: var(--gold);
+      position: relative;
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 40px;
+      font-weight: 400;
+      transition: color var(--t);
+    }
+
+    [data-lang="ar"] .hero-desc {
+      font-size: 16px;
+      max-width: 620px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    [data-lang="ar"] .hero-ctas {
+      flex-direction: row-reverse;
+    }
+
+    /* Magnetic Buttons */
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.2s, box-shadow var(--t);
+      box-shadow: 0 5px 20px rgba(26, 159, 212, 0.2);
+    }
+
+    .cta-primary:hover {
+      background: #178ebd;
+      box-shadow: 0 10px 30px rgba(26, 159, 212, 0.4);
+    }
+
+    .cta-sec {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: transparent;
+      color: var(--txt);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color var(--t), color var(--t), background var(--t);
+    }
+
+    .cta-sec:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--blue-soft);
+    }
+
+    /* Hero Pillars Card Row */
+    .hero-pillars {
+      display: flex;
+      gap: 16px;
+      margin-top: 56px;
+      max-width: 680px;
+    }
+
+    [data-lang="ar"] .hero-pillars {
+      flex-direction: row-reverse;
+    }
+
+    .hp {
+      flex: 1;
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: transform var(--t) var(--ease), border-color var(--t), background var(--t);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hp::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--blue);
+      opacity: 0;
+      transition: opacity var(--t);
+    }
+    [data-lang="ar"] .hp::after {
+      left: auto; right: 0;
+    }
+
+    .hp:hover {
+      transform: translateY(-5px);
+      border-color: var(--blue-medium);
+      background: var(--surface2);
+    }
+
+    .hp:hover::after {
+      opacity: 1;
+    }
+
+    .hp-icon {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .hp-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--head);
+      margin-bottom: 6px;
+      transition: color var(--t);
+    }
+
+    [data-lang="ar"] .hp-name {
+      font-family: 'Tajawal', sans-serif !important;
+      font-size: 16px;
+    }
+
+    .hp-txt {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      transition: color var(--t);
+    }
+
+    /* Floating Geometric Abstract Objects */
+    .float-shape {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 1px solid rgba(26, 159, 212, 0.08);
+      border-radius: 20px;
+      z-index: -1;
+      animation: floatMotion 12s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    .float-shape-1 {
+      top: 15%; right: 10%;
+    }
+    .float-shape-2 {
+      bottom: 15%; left: 5%;
+      width: 80px; height: 80px;
+      animation-delay: -3s;
+    }
+
+    @keyframes floatMotion {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(45deg); }
+    }
+
+    /* Scroll Indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: clamp(20px, 5vw, 88px);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      transition: color var(--t);
+    }
+
+    .hero-scroll-line {
+      width: 40px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    [data-lang="ar"] .hero-scroll {
+      left: auto;
+      right: clamp(20px, 5vw, 88px);
+      flex-direction: row-reverse;
+    }
+
+    /* ════════════════════════════════════
+       COMMON SECTIONS LAYOUT
+    ════════════════════════════════════ */
+    section {
+      padding: 110px clamp(20px, 5vw, 88px);
+      position: relative;
+    }
+
+    .sec-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    [data-lang="ar"] .sec-eyebrow {
+      letter-spacing: 0;
+      text-transform: none;
+      flex-direction: row-reverse;
+    }
+
+    .sec-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--blue);
+    }
+
+    [data-lang="ar"] .sec-eyebrow::before { display: none; }
+    [data-lang="ar"] .sec-eyebrow::after {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--blue);
+    }
+
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4.5vw, 54px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      color: var(--head);
+      margin-bottom: 48px;
+      transition: color var(--t);
+    }
+
+    [data-lang="ar"] .sec-title {
+      font-family: 'Tajawal', sans-serif !important;
+      font-size: clamp(28px, 4vw, 46px);
+      letter-spacing: 0;
+      line-height: 1.4;
+    }
+
+    .sec-title em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .sec-title .accent-num {
+      color: var(--gold);
+      font-size: 0.7em;
+      font-style: italic;
+      vertical-align: super;
+      margin-right: 4px;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-b) 30%, var(--border-b) 70%, transparent);
+    }
+
+    /* ════════════════════════════════════
+       ABOUT (STATS & VALUES)
+    ════════════════════════════════════ */
+    .about {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    [data-lang="ar"] .about-wrap {
+      direction: rtl;
+    }
+
+    .about-copy p {
+      font-size: 16.5px;
+      line-height: 1.95;
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-weight: 400;
+      transition: color var(--t);
+    }
+
+    .about-copy p + p {
+      margin-bottom: 0;
+    }
+
+    /* Stats Grid with dynamic animated counts */
+    .about-nums {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .anum {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 20px;
+      transition: background var(--t), border-color var(--t);
+    }
+
+    .anum-n {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    
+    .anum-n b {
+      font-weight: 400;
+      color: var(--gold);
+    }
+
+    .anum-l {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* Corporate Core Values */
+    .value-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .value-row {
+      display: flex;
+      gap: 20px;
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      align-items: flex-start;
+      transition: border-color var(--t), background var(--t);
+    }
+
+    .value-row:hover {
+      border-color: var(--border-b);
+      background: var(--surface2);
+    }
+
+    [data-lang="ar"] .value-row {
+      flex-direction: row-reverse;
+    }
+
+    .vnum {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--gold);
+      min-width: 28px;
+      margin-top: 3px;
+    }
+
+    [data-lang="ar"] .vnum {
+      font-family: 'Tajawal', sans-serif !important;
+      font-style: normal;
+    }
+
+    .v-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--head);
+      margin-bottom: 6px;
+    }
+
+    [data-lang="ar"] .v-name {
+      font-family: 'Tajawal', sans-serif !important;
+      font-size: 16px;
+    }
+
+    .v-desc {
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    /* ════════════════════════════════════
+       PARTNERS MARQUEE
+    ════════════════════════════════════ */
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 0;
+      position: relative;
+    }
+
+    .marquee-container::before,
+    .marquee-container::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .marquee-container::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--bg) 0%, transparent 100%);
+    }
+
+    .marquee-container::after {
+      right: 0;
+      background: linear-gradient(-90deg, var(--bg) 0%, transparent 100%);
+    }
+
+    .marquee-inner {
+      display: flex;
+      width: max-content;
+      animation: marqueeLoop 25s linear infinite;
+    }
+
+    .marquee-item {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--muted);
+      margin: 0 45px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .marquee-item::after {
+      content: '✦';
+      color: var(--gold);
+      font-size: 12px;
+    }
+
+    @keyframes marqueeLoop {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+
+    /* ════════════════════════════════════
+       SERVICES (3D TILT CARDS)
+    ════════════════════════════════════ */
+    .services-intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+    }
+
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      perspective: 1000px;
+    }
+
+    .sc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 38px 30px;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+    }
+
+    .sc:hover {
+      background: var(--surface2);
+      border-color: var(--blue-medium);
+    }
+
+    .sc-icon {
+      font-size: 32px;
+      margin-bottom: 20px;
+      display: inline-block;
+      transition: transform 0.5s ease;
+      transform: translateZ(30px);
+    }
+
+    .sc:hover .sc-icon {
+      animation: bobAnimation 2s infinite ease-in-out;
+    }
+
+    @keyframes bobAnimation {
+      0%, 100% { transform: translateZ(30px) translateY(0); }
+      50% { transform: translateZ(30px) translateY(-6px); }
+    }
+
+    .sc-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--head);
+      margin-bottom: 12px;
+      line-height: 1.3;
+      transform: translateZ(25px);
+    }
+
+    [data-lang="ar"] .sc-name {
+      font-family: 'Tajawal', sans-serif !important;
+      font-size: 17px;
+    }
+
+    .sc-desc {
+      font-size: 13.5px;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-weight: 400;
+      transform: translateZ(20px);
+    }
+
+    .sc-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue);
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-medium);
+      padding: 4px 12px;
+      border-radius: 6px;
+      display: inline-block;
+      transform: translateZ(15px);
+    }
+
+    /* ════════════════════════════════════
+       SYSTEMS BANNER (HORIZONTAL SCROLL)
+    ════════════════════════════════════ */
+    .banner {
+      background: var(--blue);
+      padding: 56px clamp(20px, 5vw, 88px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner::before {
+      content: '3ACo';
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Playfair Display', serif;
+      font-size: 160px;
+      font-weight: 800;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.04);
+      pointer-events: none;
+    }
+
+    [data-lang="ar"] .banner::before {
+      right: auto;
+      left: 40px;
+      font-style: normal;
+    }
+
+    .banner-head {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3.2vw, 36px);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+      position: relative;
+      z-index: 2;
+    }
+
+    [data-lang="ar"] .banner-head {
+      font-family: 'Tajawal', sans-serif !important;
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.5;
+    }
+
+    .banner-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+    }
+
+    .sys-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      background: rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 100px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    /* ════════════════════════════════════
+       PARTNERS (GLASSMORPHISM CHIPS)
+    ════════════════════════════════════ */
+    .partners {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 80px;
+    }
+
+    [data-lang="ar"] .partners-grid {
+      direction: rtl;
+    }
+
+    .partners-side-desc {
+      font-size: 14.5px;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-top: 16px;
+    }
+
+    .pcat {
+      margin-bottom: 40px;
+    }
+
+    .pcat:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .pcat-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    [data-lang="ar"] .pcat-name {
+      letter-spacing: 0;
+      text-transform: none;
+      text-align: right;
+    }
+
+    .prow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* Glassmorphic Chips */
+    .pchip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--chip-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--txt);
+      transition: transform var(--t) var(--ease), border-color var(--t), background var(--t), box-shadow var(--t);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      cursor: default;
+    }
+
+    .pchip:hover {
+      transform: scale(1.05);
+      border-color: var(--blue);
+      background: var(--blue-soft);
+      box-shadow: 0 5px 20px var(--blue-soft);
+    }
+
+    .pchip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    /* ════════════════════════════════════
+       CONTACT & COMMUNICATIONS (RESTRUCTURED)
+    ════════════════════════════════════ */
+    .contact {
+      border-top: 1px solid var(--border);
+    }
+
+    /* 3-Column Complex Grid Layout for Communications */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.9fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    [data-lang="ar"] .contact-grid {
+      direction: rtl;
+    }
+
+    /* Left Side: Physical Corporate Hubs & Direct Channels */
+    .c-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Glassmorphic Contact Cards */
+    .ci-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: transform var(--t) var(--ease), border-color var(--t), background var(--t);
+    }
+
+    .ci-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--blue-medium);
+      background: var(--surface2);
+    }
+
+    [data-lang="ar"] .ci-card {
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+
+    .ci-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-medium);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .ci-details {
+      flex-grow: 1;
+    }
+
+    .ci-lbl {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    [data-lang="ar"] .ci-lbl {
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .ci-val {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--txt);
+      line-height: 1.5;
+    }
+
+    .ci-val a {
+      color: var(--txt);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .ci-val a:hover {
+      color: var(--blue);
+    }
+
+    /* Right Side: Dual-Profile Executive Grid */
+    .executive-showcase {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .executive-showcase {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .person-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform var(--t) var(--ease), border-color var(--t), background var(--t);
+    }
+
+    /* Gold-tinted micro-border highlight for General Manager */
+    .person-card.gm-accent {
+      border: 1px solid rgba(200, 169, 110, 0.25);
+    }
+
+    .person-card.gm-accent:hover {
+      border-color: var(--gold);
+    }
+
+    .person-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--blue-medium);
+      background: var(--surface2);
+    }
+
+    .person-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--blue-soft) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .person-card.gm-accent::before {
+      background: linear-gradient(135deg, rgba(200, 169, 110, 0.05) 0%, transparent 60%);
+    }
+
+    .person-card::after {
+      content: '3ACo';
+      position: absolute;
+      bottom: -20px;
+      right: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 90px;
+      font-style: italic;
+      font-weight: 800;
+      color: rgba(26, 159, 212, 0.02);
+      pointer-events: none;
+    }
+
+    .person-card.gm-accent::after {
+      color: rgba(200, 169, 110, 0.02);
+    }
+
+    [data-lang="ar"] .person-card {
+      text-align: right;
+    }
+    [data-lang="ar"] .person-card::after {
+      right: auto;
+      left: 10px;
+      font-style: normal;
+    }
+
+    .person-pill {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue);
+      border: 1px solid var(--blue-medium);
+      background: var(--blue-soft);
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .person-card.gm-accent .person-pill {
+      color: var(--gold);
+      border-color: var(--gold-soft);
+      background: rgba(200, 169, 110, 0.05);
+    }
+
+    [data-lang="ar"] .person-pill {
+      align-self: flex-start;
+    }
+
+    .person-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--head);
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    [data-lang="ar"] .person-name {
+      font-family: 'Tajawal', sans-serif !important;
+      font-size: 20px;
+    }
+
+    .person-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .pcl {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--t);
+    }
+
+    .pcl:hover {
+      color: var(--blue);
+    }
+
+    .person-card.gm-accent .pcl:hover {
+      color: var(--gold);
+    }
+
+    [data-lang="ar"] .pcl {
+      flex-direction: row-reverse;
+    }
+
+    /* ════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════ */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 40px clamp(20px, 5vw, 88px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    [data-lang="ar"] footer {
+      flex-direction: row-reverse;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--head);
+    }
+
+    .footer-brand b {
+      font-style: normal;
+      color: var(--blue);
+    }
+
+    [data-lang="ar"] .footer-brand {
+      font-family: 'Tajawal', sans-serif !important;
+      font-style: normal;
+    }
+
+    .footer-motto {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 0.5px;
+    }
+
+    .footer-copy {
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    /* ════════════════════════════════════
+       RESPONSIVE ADAPTATIONS
+    ════════════════════════════════════ */
+    @media (max-width: 960px) {
+      .about-wrap, .contact-grid, .partners-grid {
+        grid-template-columns: 1fr;
+        gap: 56px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero-pillars {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero, section {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .hero {
+        padding-top: 100px;
+      }
+      section {
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+      .banner {
+        padding: 48px 20px;
+      }
+      footer {
+        padding: 32px 20px;
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
-<nav style="box-shadow: none;">
-  <a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#" class="nav-brand">
-    <span class="nav-wordmark"><b>3</b>ACo</span>
-    <span class="nav-sep"></span>
-    <span class="nav-sub">
-      <span class="en-i">Smart Engineering Solutions</span>
-      <span class="ar-i">حلول الهندسة الذكية</span>
-    </span>
-  </a>
+  <!-- Background Overlays -->
+  <div class="noise-grain"></div>
+  <div class="mesh-gradient-bg" id="ambient-mesh"></div>
+  <div class="cursor-orb" id="custom-cursor"></div>
 
-  <ul class="nav-links">
-    <li><a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#about"><span class="en-i">About</span><span class="ar-i">عن الشركة</span></a></li>
-    <li><a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#services"><span class="en-i">Services</span><span class="ar-i">الخدمات</span></a></li>
-    <li><a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#partners"><span class="en-i">Partners</span><span class="ar-i">الشركاء</span></a></li>
-    <li><a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#contact"><span class="en-i">Contact</span><span class="ar-i">تواصل</span></a></li>
-  </ul>
-
-  <div class="nav-controls">
-    <div class="lang-toggle">
-      <button class="lang-btn active" id="btn-en" onclick="setLang(&#39;en&#39;)">EN</button>
-      <button class="lang-btn" id="btn-ar" onclick="setLang(&#39;ar&#39;)">ع</button>
-    </div>
-    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="pBar"></div>
   </div>
-</nav>
 
-<!-- ══ HERO ══ -->
-<section class="hero" style="padding:110px clamp(20px,5vw,88px) 80px">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-
-  <div class="hero-inner">
-    <div class="hero-kicker">
-      <span class="hero-kicker-bar"></span>
-      <span class="hero-kicker-text">
-        <span class="en-i">3ACo · Cairo, Egypt</span>
-        <span class="ar-i">3ACo · القاهرة، مصر</span>
+  <!-- ══ NAV ══ -->
+  <nav id="navbar">
+    <a href="#" class="nav-brand">
+      <span class="nav-wordmark"><b>3</b>ACo</span>
+      <span class="nav-sep"></span>
+      <span class="nav-sub">
+        <span class="en-i">Smart Engineering Solutions</span>
+        <span class="ar-i">حلول الهندسة الذكية</span>
       </span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#about"><span class="en-i">About</span><span class="ar-i">عن الشركة</span></a></li>
+      <li><a href="#services"><span class="en-i">Services</span><span class="ar-i">الخدمات</span></a></li>
+      <li><a href="#partners"><span class="en-i">Partners</span><span class="ar-i">الشركاء</span></a></li>
+      <li><a href="#contact"><span class="en-i">Contact</span><span class="ar-i">اتصال</span></a></li>
+    </ul>
+
+    <div class="nav-controls">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-en" onclick="switchLanguage('en')">EN</button>
+        <button class="lang-btn" id="btn-ar" onclick="switchLanguage('ar')">عربي</button>
+      </div>
+      <button class="theme-btn" id="theme-toggler" onclick="changeTheme()">🌙</button>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero" id="hero-sec">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-grid"></div>
+
+    <div class="float-shape float-shape-1"></div>
+    <div class="float-shape float-shape-2"></div>
+
+    <div class="hero-inner">
+      <div class="hero-kicker">
+        <span class="hero-kicker-bar"></span>
+        <span class="hero-kicker-text">
+          <span class="en-i">3ACo · Cairo, Egypt</span>
+          <span class="ar-i">3ACo · القاهرة، مصر</span>
+          <span class="gold-dot"></span>
+        </span>
+      </div>
+
+      <!-- Redesigned Typographic Balance -->
+      <h1 class="hero-h1 en">
+        Smart Building<br>
+        <span class="light-title">&amp; Security</span> <em class="gold-glow">Solutions</em>
+      </h1>
+      <h1 class="hero-h1 ar">
+        حلول المباني<br>
+        <span class="light-title">الذكية</span> والأمنية <em class="gold-glow">المتكاملة</em>
+      </h1>
+
+      <p class="hero-desc en">
+        Integrated light current engineering infrastructure — from advanced CCTV and fire protection to smart lighting, networking, and comprehensive BMS platforms. Engineered for distinction across Egypt.
+      </p>
+      <p class="hero-desc ar">
+        حلول هندسية متكاملة للتيار الخفيف وأنظمة المباني — من المراقبة والإنذار ضد الحريق إلى الإضاءة الذكية والشبكات وأنظمة إدارة المباني BMS. نصممها بامتياز في مصر.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#services" class="cta-primary magnetic-btn">
+          <span class="en-i">Explore Our Services</span>
+          <span class="ar-i">استكشف خدماتنا</span>
+          <span>→</span>
+        </a>
+        <a href="#contact" class="cta-sec magnetic-btn">
+          <span class="en-i">Get in Touch</span>
+          <span class="ar-i">تواصل معنا</span>
+        </a>
+      </div>
+
+      <div class="hero-pillars">
+        <div class="hp">
+          <div class="hp-icon">⚡</div>
+          <div class="hp-name"><span class="en-i">Active</span><span class="ar-i">نشط</span></div>
+          <div class="hp-txt en">Agile on-site mobilization and rapid execution through every structural phase.</div>
+          <div class="hp-txt ar">استجابة سريعة وتواجد ميداني دائم لضمان سلاسة التنفيذ بكل مرحلة.</div>
+        </div>
+        <div class="hp">
+          <div class="hp-icon">🎯</div>
+          <div class="hp-name"><span class="en-i">Accurate</span><span class="ar-i">دقيق</span></div>
+          <div class="hp-txt en">Engineering specifications designed strictly for project integrity and safety compliance.</div>
+          <div class="hp-txt ar">تصاميم ومواصفات هندسية دقيقة متوافقة تمامًا مع متطلبات الأمان.</div>
+        </div>
+        <div class="hp">
+          <div class="hp-icon">🚀</div>
+          <div class="hp-name"><span class="en-i">Advanced</span><span class="ar-i">متقدم</span></div>
+          <div class="hp-txt en">Deploying world-class systems with globally certified manufacturing partners.</div>
+          <div class="hp-txt ar">أنظمة حديثة بالاعتماد على شراكات مع أفضل المصنعين عالميًا.</div>
+        </div>
+      </div>
     </div>
 
-    <h1 class="hero-h1 en">
-      Smart Building<br>
-      &amp; <em>Security</em><br>
-      <span class="light">Solutions</span>
-    </h1>
-    <h1 class="hero-h1 ar" style="display:none">
-      حلول المباني<br>
-      <em>الذكية</em> والأمنية<br>
-    </h1>
-
-    <p class="hero-desc en">
-      Integrated engineering solutions for modern buildings — from CCTV and fire systems to smart lighting, networking and full BMS integration. Delivered with precision across Egypt.
-    </p>
-    <p class="hero-desc ar" style="display:none">
-      حلول هندسية متكاملة للمباني الحديثة — من أنظمة المراقبة والحريق إلى الإضاءة الذكية والشبكات وأتمتة المباني الكاملة. بدقة عالية في أنحاء مصر.
-    </p>
-
-    <div class="hero-ctas">
-      <a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#services" class="cta-primary">
-        <span class="en-i">Explore Our Services</span>
-        <span class="ar-i">استعرض خدماتنا</span>
-        <span>→</span>
-      </a>
-      <a href="file:///home/kareem-mohamed/Downloads/FreeDownloadManager/3aco_portfolio_v4.html#contact" class="cta-sec">
-        <span class="en-i">Get in Touch</span>
-        <span class="ar-i">تواصل معنا</span>
-      </a>
+    <div class="hero-scroll">
+      <span class="hero-scroll-line"></span>
+      <span class="en-i">Scroll to explore</span>
+      <span class="ar-i">مرر للاستكشاف</span>
     </div>
+  </section>
 
-    <div class="hero-pillars">
-      <div class="hp" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
-        <div class="hp-icon">⚡</div>
-        <div class="hp-name"><span class="en-i">Active</span><span class="ar-i">نشط</span></div>
-        <div class="hp-txt en">Rapid response, on-site every phase</div>
-        <div class="hp-txt ar" style="display:none">استجابة سريعة وتواجد دائم</div>
+  <!-- ══ ABOUT ══ -->
+  <section class="about" id="about">
+    <div class="about-wrap">
+      <div class="about-copy">
+        <div class="sec-eyebrow"><span class="en-i">Who We Are</span><span class="ar-i">من نحن</span></div>
+        <h2 class="sec-title">
+          <span class="en-i">Built on <em>Precision</em></span>
+          <span class="ar-i">مبنيون على <em>الدقة</em></span>
+        </h2>
+        <p class="en">3ACo for Services Engineering &amp; Supplies specializes in complex electrical infrastructure, advanced smart building applications, and innovative lighting installations.</p>
+        <p class="ar">شركة 3ACo للخدمات الهندسية والتوريدات، متخصصة في البنية التحتية الكهربائية للتيار الخفيف، التطبيقات الذكية المتطورة، وحلول الإضاءة المبتكرة.</p>
+        <p class="en">From the Administrative Capital to prestigious private developments across Cairo, our technical teams direct design, procurement, integration, and operational maintenance.</p>
+        <p class="ar">من العاصمة الإدارية الجديدة إلى المجمعات السكنية الفاخرة، تتولى فرقنا الهندسية مهام التصميم، التوريد، التركيب، والصيانة التشغيلية.</p>
+
+        <div class="about-nums">
+          <div class="anum">
+            <div class="anum-n" data-val="12">0<b>+</b></div>
+            <div class="anum-l en">Engineering Solutions</div>
+            <div class="anum-l ar">حلول هندسية</div>
+          </div>
+          <div class="anum">
+            <div class="anum-n" data-val="20">0<b>+</b></div>
+            <div class="anum-l en">Brand Partners</div>
+            <div class="anum-l ar">شريك معتمد</div>
+          </div>
+          <div class="anum">
+            <div class="anum-n">EG</div>
+            <div class="anum-l en">Cairo Office</div>
+            <div class="anum-l ar">مقر القاهرة</div>
+          </div>
+          <div class="anum">
+            <div class="anum-n">3A</div>
+            <div class="anum-l en">Core Pillars</div>
+            <div class="anum-l ar">قيم أساسية</div>
+          </div>
+        </div>
       </div>
-      <div class="hp" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.03s, transform 0.5s 0.03s;">
-        <div class="hp-icon">🎯</div>
-        <div class="hp-name"><span class="en-i">Accurate</span><span class="ar-i">دقيق</span></div>
-        <div class="hp-txt en">Precise specs, zero compromise</div>
-        <div class="hp-txt ar" style="display:none">مواصفات دقيقة بلا تنازلات</div>
+
+      <div class="value-list">
+        <div class="value-row">
+          <div class="vnum">01</div>
+          <div>
+            <div class="v-name"><span class="en-i">Active</span><span class="ar-i">نشط</span></div>
+            <div class="v-desc en">Full operational visibility from initial feasibility assessment to system commissioning.</div>
+            <div class="v-desc ar">متابعة تشغيلية مستمرة من الدراسات الأولية وحتى تشغيل الأنظمة بالكامل.</div>
+          </div>
+        </div>
+        <div class="value-row">
+          <div class="vnum">02</div>
+          <div>
+            <div class="v-name"><span class="en-i">Accurate</span><span class="ar-i">دقيق</span></div>
+            <div class="v-desc en">Zero compromise tolerances, assuring seamless integration of complex architectures.</div>
+            <div class="v-desc ar">التزام تام بالمعايير الدقيقة لضمان تكامل رصين وموثوق في بيئة العمل.</div>
+          </div>
+        </div>
+        <div class="value-row">
+          <div class="vnum">03</div>
+          <div>
+            <div class="v-name"><span class="en-i">Advanced</span><span class="ar-i">متقدم</span></div>
+            <div class="v-desc en">A future-proof perspective driving technical decisions and equipment specifications.</div>
+            <div class="v-desc ar">منظور مستقبلي متطور يوجه اختياراتنا الفنية ومواصفات الأجهزة والبرمجيات.</div>
+          </div>
+        </div>
       </div>
-      <div class="hp" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.06s, transform 0.5s 0.06s;">
-        <div class="hp-icon">🚀</div>
-        <div class="hp-name"><span class="en-i">Advanced</span><span class="ar-i">متقدم</span></div>
-        <div class="hp-txt en">World-class technology partners</div>
-        <div class="hp-txt ar" style="display:none">شراكات تقنية عالمية المستوى</div>
-      </div>
+    </div>
+  </section>
+
+  <!-- ══ INFINITE BRAND RUNNING MARQUEE ══ -->
+  <div class="marquee-container">
+    <div class="marquee-inner">
+      <span class="marquee-item">CISCO</span>
+      <span class="marquee-item">HUAWEI</span>
+      <span class="marquee-item">HIKVISION</span>
+      <span class="marquee-item">DAHUA</span>
+      <span class="marquee-item">PANDUIT</span>
+      <span class="marquee-item">LEGRAND</span>
+      <span class="marquee-item">GEWISS</span>
+      <span class="marquee-item">GRANDSTREAM</span>
+      <!-- Duplicate for looping -->
+      <span class="marquee-item">CISCO</span>
+      <span class="marquee-item">HUAWEI</span>
+      <span class="marquee-item">HIKVISION</span>
+      <span class="marquee-item">DAHUA</span>
+      <span class="marquee-item">PANDUIT</span>
+      <span class="marquee-item">LEGRAND</span>
+      <span class="marquee-item">GEWISS</span>
+      <span class="marquee-item">GRANDSTREAM</span>
     </div>
   </div>
 
-  <div class="hero-scroll">
-    <span class="hero-scroll-line"></span>
-    <span class="en-i">Scroll to explore</span>
-    <span class="ar-i">مرر للاستعراض</span>
-  </div>
-</section>
+  <div class="divider"></div>
 
-<!-- ══ ABOUT ══ -->
-<section class="about" id="about">
-  <div class="about-wrap">
-    <div class="about-copy">
-      <div class="sec-eyebrow"><span class="en-i">Who We Are</span><span class="ar-i">من نحن</span></div>
-      <h2 class="sec-title">
-        <span class="en-i">Built on <em>Precision</em></span>
-        <span class="ar-i">مبنيون على <em>الدقة</em></span>
-      </h2>
-      <p class="en">3ACo for Services Engineering &amp; Supplies is a Cairo-based firm specialising in the full spectrum of light current, smart building systems, and modern lighting solutions.</p>
-      <p class="ar" style="display:none">شركة 3ACo للخدمات الهندسية والتوريدات مقرها القاهرة، متخصصة في المنظومة الكاملة للتيار الخفيف وأنظمة المباني الذكية وحلول الإضاءة الحديثة.</p>
-      <p class="en">From the Administrative Capital to residential compounds across Egypt, our engineering teams design, supply, install and maintain world-class infrastructure.</p>
-      <p class="ar" style="display:none">من العاصمة الإدارية إلى المجمعات السكنية في أنحاء مصر، فرقنا الهندسية تصمم وتورد وتركب وتصون بنية تحتية بمعايير عالمية.</p>
-
-      <div class="about-nums">
-        <div class="anum" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.09s, transform 0.5s 0.09s;">
-          <div class="anum-n">12+</div>
-          <div class="anum-l en">Engineering Services</div>
-          <div class="anum-l ar" style="display:none">خدمة هندسية</div>
-        </div>
-        <div class="anum" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.12s, transform 0.5s 0.12s;">
-          <div class="anum-n">20+</div>
-          <div class="anum-l en">Brand Partners</div>
-          <div class="anum-l ar" style="display:none">شريك تقني</div>
-        </div>
-        <div class="anum" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.15s, transform 0.5s 0.15s;">
-          <div class="anum-n">EG</div>
-          <div class="anum-l en">Cairo, Egypt</div>
-          <div class="anum-l ar" style="display:none">القاهرة، مصر</div>
-        </div>
-        <div class="anum" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.18s, transform 0.5s 0.18s;">
-          <div class="anum-n">3A</div>
-          <div class="anum-l en">Core Values</div>
-          <div class="anum-l ar" style="display:none">قيمنا الأساسية</div>
-        </div>
+  <!-- ══ SERVICES ══ -->
+  <section id="services">
+    <div class="services-intro">
+      <div>
+        <div class="sec-eyebrow"><span class="en-i">What We Do</span><span class="ar-i">خدماتنا</span></div>
+        <h2 class="sec-title">
+          <span class="en-i">Our <em>Capabilities</em></span>
+          <span class="ar-i"><em>مجالات</em> التخصص</span>
+        </h2>
       </div>
     </div>
 
-    <div>
-      <div class="value-row" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.21s, transform 0.5s 0.21s;">
-        <div class="vnum">01</div>
-        <div>
-          <div class="v-name"><span class="en-i">Active</span><span class="ar-i">نشط</span></div>
-          <div class="v-desc en">Rapid response and on-site presence throughout every project phase — from initial survey to final commissioning.</div>
-          <div class="v-desc ar" style="display:none">استجابة سريعة وحضور ميداني دائم في كل مرحلة من مراحل المشروع — من المسح الأولي حتى التسليم.</div>
-        </div>
+    <div class="svc-grid">
+      <!-- S1 -->
+      <div class="sc">
+        <span class="sc-icon">🏦</span>
+        <div class="sc-name en">Smart Building</div>
+        <div class="sc-name ar">أتمتة المباني الذكية</div>
+        <p class="sc-desc en">Total integration for modern assets including BMS, RMS, and Unified Technology frameworks.</p>
+        <p class="sc-desc ar">دمج كامل لمنظومات BMS و RMS و UTB للمنشآت والمباني الذكية الحديثة.</p>
+        <span class="sc-badge">BMS · RMS · UTB</span>
       </div>
-      <div class="value-row" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.24s, transform 0.5s 0.24s;">
-        <div class="vnum">02</div>
-        <div>
-          <div class="v-name"><span class="en-i">Accurate</span><span class="ar-i">دقيق</span></div>
-          <div class="v-desc en">Engineering precision in every detail — correct specifications, correct installation, zero compromise on quality or safety.</div>
-          <div class="v-desc ar" style="display:none">دقة هندسية في كل تفصيلة — المواصفات الصحيحة، التركيب الصحيح، بلا تنازل في الجودة أو السلامة.</div>
-        </div>
+      <!-- S2 -->
+      <div class="sc">
+        <span class="sc-icon">📹</span>
+        <div class="sc-name en">CCTV Systems</div>
+        <div class="sc-name ar">أنظمة المراقبة التلفزيونية</div>
+        <p class="sc-desc en">High-definition network surveillance utilizing AI diagnostics, local recording, and telemetry.</p>
+        <p class="sc-desc ar">أنظمة مراقبة IP عالية الدقة مع تحليلات ذكية وإدارة وتحكم مركزي.</p>
+        <span class="sc-badge">Hikvision · Dahua · UNV</span>
       </div>
-      <div class="value-row" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.27s, transform 0.5s 0.27s;">
-        <div class="vnum">03</div>
-        <div>
-          <div class="v-name"><span class="en-i">Advanced</span><span class="ar-i">متقدم</span></div>
-          <div class="v-desc en">Cutting-edge technology and forward-thinking integration. Exclusive partnerships with globally certified manufacturers.</div>
-          <div class="v-desc ar" style="display:none">تقنية متطورة ودمج استشرافي. شراكات حصرية مع مصنّعين معتمدين دوليًا.</div>
-        </div>
+      <!-- S3 -->
+      <div class="sc">
+        <span class="sc-icon">📢</span>
+        <div class="sc-name en">Public Address</div>
+        <div class="sc-name ar">النداء العام والصوتيات</div>
+        <p class="sc-desc en">Multi-zone systems optimized for acoustic clarity, mass notifications, and integrated evacuation signals.</p>
+        <p class="sc-desc ar">أنظمة صوتية متكاملة لنداء الطوارئ والإخلاء مخصصة للمنشآت الكبرى.</p>
+        <span class="sc-badge">Audio · Evacuation</span>
+      </div>
+      <!-- S4 -->
+      <div class="sc">
+        <span class="sc-icon">🚨</span>
+        <div class="sc-name en">Fire Alarm</div>
+        <div class="sc-name ar">إنذار الحريق المبكر</div>
+        <p class="sc-desc en">Addressable smart sensor systems designed in alignment with civil safety parameters.</p>
+        <p class="sc-desc ar">أنظمة كشف حريق عنوانية وحلول ذكية مصممة طبقاً للأكواد والمواصفات المدنية.</p>
+        <span class="sc-badge">Detection · Safety</span>
+      </div>
+      <!-- S5 -->
+      <div class="sc">
+        <span class="sc-icon">🔥</span>
+        <div class="sc-name en">Fire Fighting</div>
+        <div class="sc-name ar">مكافحة وإطفاء الحريق</div>
+        <p class="sc-desc en">Certified automatic suppression, wet/dry pipe sprinkler grids, and clean agent gas deployment.</p>
+        <p class="sc-desc ar">شبكات إطفاء مائية، رشاشات تلقائية وإخماد غازي معتمد هندسياً بالكامل.</p>
+        <span class="sc-badge">Suppression · Hydrant</span>
+      </div>
+      <!-- S6 -->
+      <div class="sc">
+        <span class="sc-icon">☎️</span>
+        <div class="sc-name en">PABX / Central</div>
+        <div class="sc-name ar">السنترالات والاتصال الداخلي</div>
+        <p class="sc-desc en">Enterprise-grade IP-telephony and intercommunication networks for structural voice solutions.</p>
+        <p class="sc-desc ar">شبكات اتصال داخلي وهواتف IP متطورة لتسهيل التواصل المؤسسي بكفاءة.</p>
+        <span class="sc-badge">Grandstream · Q-Serve</span>
+      </div>
+      <!-- S7 -->
+      <div class="sc">
+        <span class="sc-icon">❄️</span>
+        <div class="sc-name en">Air Conditioning</div>
+        <div class="sc-name ar">تكييف الهواء والتهوية</div>
+        <p class="sc-desc en">Commercial HVAC, dynamic VRF setups, central duct networks, and precision climate technology.</p>
+        <p class="sc-desc ar">تصميم وتنفيذ تكييفات HVAC، أنظمة VRF الذكية، والتبريد الدقيق لمراكز البيانات.</p>
+        <span class="sc-badge">HVAC · Precision Cooling</span>
+      </div>
+      <!-- S8 -->
+      <div class="sc">
+        <span class="sc-icon">💡</span>
+        <div class="sc-name en">Modern Lighting</div>
+        <div class="sc-name ar">أنظمة الإضاءة الحديثة</div>
+        <p class="sc-desc en">Architectural LED specifications, automated control units, facade layouts, and landscape lighting.</p>
+        <p class="sc-desc ar">أنظمة إضاءة معمارية LED، حلول الواجهات، تحكم ذكي وتصميمات موفرة للطاقة.</p>
+        <span class="sc-badge">LED · Smart Control</span>
+      </div>
+      <!-- S9 -->
+      <div class="sc">
+        <span class="sc-icon">🔌</span>
+        <div class="sc-name en">Wiring Devices</div>
+        <div class="sc-name ar">أجهزة التوصيل والمقابس</div>
+        <p class="sc-desc en">Sourcing and installing premium aesthetic terminal controls and electric accessories.</p>
+        <p class="sc-desc ar">مجموعات فاخرة من المقابس والمفاتيح الكهربائية المعتمدة من أبرز الماركات العالمية.</p>
+        <span class="sc-badge">Gewiss · Legrand · Bticino</span>
+      </div>
+      <!-- S10 -->
+      <div class="sc">
+        <span class="sc-icon">🔗</span>
+        <div class="sc-name en">Network Infrastructure</div>
+        <div class="sc-name ar">البنية التحتية للشبكات</div>
+        <p class="sc-desc en">High-capacity active switches, robust fiber-optic grids, backbones, and server environments.</p>
+        <p class="sc-desc ar">تمديد كابلات الألياف الضوئية، والشبكات النحاسية المنظمة لمراكز ومخدمات البيانات.</p>
+        <span class="sc-badge">Fiber · Cat6A · Panduit</span>
+      </div>
+      <!-- S11 -->
+      <div class="sc">
+        <span class="sc-icon">🚪</span>
+        <div class="sc-name en">Access Control</div>
+        <div class="sc-name ar">التحكم في الدخول والعبور</div>
+        <p class="sc-desc en">Biometric security, RFID gates, proximity management, and centralized attendance analytics.</p>
+        <p class="sc-desc ar">بوابات ذكية لضبط الدخول، قارئات بيومترية والتحقق عبر بصمات الوجه والأصابع.</p>
+        <span class="sc-badge">ZKTeco · Smart Lock</span>
+      </div>
+      <!-- S12 -->
+      <div class="sc">
+        <span class="sc-icon">🏗️</span>
+        <div class="sc-name en">Metal &amp; Steel Works</div>
+        <div class="sc-name ar">الأعمال المعدنية والهياكل</div>
+        <p class="sc-desc en">Engineering design for streetlighting masts, high-rise frames, and customized heavy-duty steel trays.</p>
+        <p class="sc-desc ar">تصنيع وتوريد أعمدة إنارة الشوارع والأبراج الفولاذية وحوامل الكابلات المعدنية.</p>
+        <span class="sc-badge">Poles · High-Mast · Fabrication</span>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
-
-<!-- ══ SERVICES ══ -->
-<section id="services">
-  <div class="svc-intro">
-    <div>
-      <div class="sec-eyebrow"><span class="en-i">What We Do</span><span class="ar-i">ماذا نقدم</span></div>
-      <h2 class="sec-title">
-        <span class="en-i">Our <em>Services</em></span>
-        <span class="ar-i"><em>خدماتنا</em></span>
-      </h2>
-    </div>
-  </div>
-
-  <div class="svc-grid">
-    <div class="sc" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.3s, transform 0.5s 0.3s;"><span class="sc-icon">🏦</span>
-      <div class="sc-name en">Smart Building</div><div class="sc-name ar" style="display:none">المبنى الذكي</div>
-      <p class="sc-desc en">Complete BMS, RMS and UTB integration for intelligent residential, commercial and institutional buildings.</p>
-      <p class="sc-desc ar" style="display:none">تكامل شامل لـ BMS وRMS وUTB للمباني السكنية والتجارية والمؤسسية الذكية.</p>
-      <span class="sc-badge">BMS · RMS · UTB</span></div>
-
-    <div class="sc" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.33s, transform 0.5s 0.33s;"><span class="sc-icon">📹</span>
-      <div class="sc-name en">CCTV Systems</div><div class="sc-name ar" style="display:none">أنظمة المراقبة</div>
-      <p class="sc-desc en">HD and IP surveillance with AI analytics, remote monitoring and centralised management. Indoor, outdoor and PTZ.</p>
-      <p class="sc-desc ar" style="display:none">مراقبة HD وIP مع تحليلات ذكاء اصطناعي وإدارة مركزية. كاميرات داخلية وخارجية وPTZ.</p>
-      <span class="sc-badge">Hikvision · Dahua · UNV</span></div>
-
-    <div class="sc" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.36s, transform 0.5s 0.36s;"><span class="sc-icon">📢</span>
-      <div class="sc-name en">Public Address</div><div class="sc-name ar" style="display:none">نظام الإذاعة العامة</div>
-      <p class="sc-desc en">PA systems for campuses and commercial spaces. Voice evacuation compliant with zone-controlled audio.</p>
-      <p class="sc-desc ar" style="display:none">أنظمة صوت للمنشآت والمجمعات التجارية. متوافقة مع إخلاء الصوت وتوزيع صوتي بالمناطق.</p>
-      <span class="sc-badge">Audio · Evacuation</span></div>
-
-    <div class="sc" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.39s, transform 0.5s 0.39s;"><span class="sc-icon">🚨</span>
-      <div class="sc-name en">Fire Alarm</div><div class="sc-name ar" style="display:none">إنذار الحريق</div>
-      <p class="sc-desc en">Addressable and conventional fire detection, compliant with international safety codes. Full design and commissioning.</p>
-      <p class="sc-desc ar" style="display:none">أنظمة كشف الحريق العنوانية والتقليدية وفق الكودات الدولية. تصميم وتوريد وتركيب وتشغيل.</p>
-      <span class="sc-badge">Detection · Safety</span></div>
-
-    <div class="sc" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.42s, transform 0.5s 0.42s;"><span class="sc-icon">🔥</span>
-      <div class="sc-name en">Fire Fighting</div><div class="sc-name ar" style="display:none">إطفاء الحريق</div>
-      <p class="sc-desc en">Suppression systems — sprinklers, gaseous suppression, hydrant networks — by certified fire engineers.</p>
-      <p class="sc-desc ar" style="display:none">أنظمة الإخماد: رشاشات وإطفاء غازي وهيدرانت — بواسطة مهندسين معتمدين.</p>
-      <span class="sc-badge">Suppression · Hydrant</span></div>
-
-    <div class="sc" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.45s, transform 0.5s 0.45s;"><span class="sc-icon">☎️</span>
-      <div class="sc-name en">PABX / Central</div><div class="sc-name ar" style="display:none">السنترال / PABX</div>
-      <p class="sc-desc en">Enterprise telephony — PABX, IP-PBX, intercom and unified communications. Scalable from single-floor to multi-site.</p>
-      <p class="sc-desc ar" style="display:none">اتصالات مؤسسية: PABX وIP-PBX وإنتركوم. قابلة للتوسع من طابق إلى مواقع متعددة.</p>
-      <span class="sc-badge">Grandstream · Q-Serve</span></div>
-
-    <div class="sc" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.48s, transform 0.5s 0.48s;"><span class="sc-icon">❄️</span>
-      <div class="sc-name en">Air Conditioning</div><div class="sc-name ar" style="display:none">التكييف</div>
-      <p class="sc-desc en">HVAC design and installation for commercial and residential projects. Split, VRF/VRV, central ducted and precision cooling.</p>
-      <p class="sc-desc ar" style="display:none">تصميم وتركيب أنظمة HVAC للمشاريع التجارية والسكنية. سبليت وVRF وتبريد دقيق.</p>
-      <span class="sc-badge">HVAC · Precision Cooling</span></div>
-
-    <div class="sc" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.51s, transform 0.5s 0.51s;"><span class="sc-icon">💡</span>
-      <div class="sc-name en">Modern Lighting</div><div class="sc-name ar" style="display:none">الإضاءة الحديثة</div>
-      <p class="sc-desc en">Architectural LED, facade and landscape illumination with smart controls. Aesthetic design with energy efficiency.</p>
-      <p class="sc-desc ar" style="display:none">إضاءة LED معمارية وواجهات وحدائق وتحكم ذكي. تصميم جمالي مع كفاءة في الطاقة.</p>
-      <span class="sc-badge">LED · Smart Control</span></div>
-
-    <div class="sc" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.54s, transform 0.5s 0.54s;"><span class="sc-icon">🔌</span>
-      <div class="sc-name en">Wiring Devices</div><div class="sc-name ar" style="display:none">أجهزة التوصيل الكهربائي</div>
-      <p class="sc-desc en">Premium wiring accessories and electrical distribution from trusted global brands, installed to exact specification.</p>
-      <p class="sc-desc ar" style="display:none">ملحقات التوصيل والتوزيع الكهربائي من علامات عالمية موثوقة، وفق مواصفات دقيقة.</p>
-      <span class="sc-badge">Gewiss · Legrand · Bticino · MK · Simon</span></div>
-
-    <div class="sc" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.57s, transform 0.5s 0.57s;"><span class="sc-icon">🔗</span>
-      <div class="sc-name en">Network Infrastructure</div><div class="sc-name ar" style="display:none">البنية التحتية للشبكات</div>
-      <p class="sc-desc en">Structured cabling, fibre optic backbone, active networking, server room build-out and full light-current systems.</p>
-      <p class="sc-desc ar" style="display:none">توصيل منظم وألياف ضوئية ومعدات نشطة وغرف خوادم ومنظومة شبكات التيار الخفيف.</p>
-      <span class="sc-badge">Fiber · Cat6A · Panduit · R&amp;M</span></div>
-
-    <div class="sc" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.6s, transform 0.5s 0.6s;"><span class="sc-icon">🚪</span>
-      <div class="sc-name en">Access Control</div><div class="sc-name ar" style="display:none">التحكم في الوصول</div>
-      <p class="sc-desc en">Biometric attendance, smart locks, card-reader access and turnstile systems. Integrated with HR platforms.</p>
-      <p class="sc-desc ar" style="display:none">حضور بيومتري وأقفال ذكية وبطاقات دخول وبوابات تحكم. مندمجة مع منصات الموارد البشرية.</p>
-      <span class="sc-badge">ZKTeco · Fingerprint · Smart Lock</span></div>
-
-    <div class="sc" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.63s, transform 0.5s 0.63s;"><span class="sc-icon">🏗️</span>
-      <div class="sc-name en">Metal &amp; Steel Works</div><div class="sc-name ar" style="display:none">أعمال المعادن والصلب</div>
-      <p class="sc-desc en">Street lighting poles, high-mast towers, cable trays and structural steel fabrication for infrastructure projects.</p>
-      <p class="sc-desc ar" style="display:none">أعمدة إضاءة وأبراج إنارة وحاملات كابلات وهياكل فولاذية للمشاريع الإنشائية.</p>
-      <span class="sc-badge">Poles · High-Mast · Fabrication</span></div>
-  </div>
-</section>
-<!-- ══ PROJECTS (NEW) ══ -->
-<section id="projects" class="projects">
-  <div class="sec-eyebrow"><span class="en-i">Projects</span><span class="ar-i">مشاريعنا</span></div>
-  <h2 class="sec-title">
-    <span class="en-i">Our <em>Work</em></span>
-    <span class="ar-i"><em>أعمالنا</em></span>
-  </h2>
-
-
-  <div class="projects-grid" id="projects-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;">
-    <!-- Group 1 (2018-2019) — Summit / EMC / UBC -->
-    <div class="proj-card" data-year="2018-2019" data-company="Summit">
-      <div class="proj-title en-i">Al Mansoura 5 (Administrative Capital) — Summit Technology Solutions</div>
-      <div class="proj-title ar-i" style="display:none">المنصورة 5 (العاصمة الإدارية) — شركة Summit</div>
-      <div class="proj-meta en-i">2018-2019 · Summit</div>
-      <div class="proj-meta ar-i" style="display:none">2018-2019 · شركة Summit</div>
-    </div>
-    <div class="proj-card" data-year="2018-2019" data-company="EMC">
-      <div class="proj-title en-i">Petrojet (Nasr City) — EMC</div>
-      <div class="proj-title ar-i" style="display:none">شركة بتروجيت (مدينة نصر) — EMC</div>
-      <div class="proj-meta en-i">2018-2019 · EMC</div>
-      <div class="proj-meta ar-i" style="display:none">2018-2019 · EMC</div>
-    </div>
-    <div class="proj-card" data-year="2018-2019" data-company="Summit">
-      <div class="proj-title en-i">Police Academy (Fifth Settlement) — Summit</div>
-      <div class="proj-title ar-i" style="display:none">أكاديمية الشرطة (التجمع الخامس) — Summit</div>
-      <div class="proj-meta en-i">2018-2019 · Summit</div>
-      <div class="proj-meta ar-i" style="display:none">2018-2019 · Summit</div>
-    </div>
-    <div class="proj-card" data-year="2018-2019" data-company="UBC">
-      <div class="proj-title en-i">Ministry of Education (Administrative Capital) — UBC</div>
-      <div class="proj-title ar-i" style="display:none">وزارة التربية والتعليم (العاصمة الإدارية) — UBC</div>
-      <div class="proj-meta en-i">2018-2019 · UBC</div>
-      <div class="proj-meta ar-i" style="display:none">2018-2019 · UBC</div>
-    </div>
-    <div class="proj-card" data-year="2018-2019" data-company="UBC">
-      <div class="proj-title en-i">Administrative Capital Company — UBC</div>
-      <div class="proj-title ar-i" style="display:none">شركة العاصمة الإدارية — UBC</div>
-      <div class="proj-meta en-i">2018-2019 · UBC</div>
-      <div class="proj-meta ar-i" style="display:none">2018-2019 · UBC</div>
-    </div>
-    <div class="proj-card" data-year="2018-2019" data-company="UBC">
-      <div class="proj-title en-i">Ministry of Higher Education & Scientific Research — UBC</div>
-      <div class="proj-title ar-i" style="display:none">وزارة التعليم العالي والبحث العلمي (العاصمة الإدارية) — UBC</div>
-      <div class="proj-meta en-i">2018-2019 · UBC</div>
-      <div class="proj-meta ar-i" style="display:none">2018-2019 · UBC</div>
-    </div>
-    <div class="proj-card" data-year="2018-2019" data-company="UBC">
-      <div class="proj-title en-i">Ministry of Tourism & Antiquities (Administrative Capital) — UBC</div>
-      <div class="proj-title ar-i" style="display:none">وزارة السياحة والآثار (العاصمة الإدارية) — UBC</div>
-      <div class="proj-meta en-i">2018-2019 · UBC</div>
-      <div class="proj-meta ar-i" style="display:none">2018-2019 · UBC</div>
-    </div>
-
-    <!-- Group 2 (2020-2023) — FIBER Misr / Nordex / Orascom / TATAS -->
-    <div class="proj-card" data-year="2020-2023" data-company="FIBER Misr">
-      <div class="proj-title en-i">Ministry of Planning & Economic Development — FIBER Misr</div>
-      <div class="proj-title ar-i" style="display:none">وزارة التخطيط والتنمية الاقتصادية — FIBER Misr</div>
-      <div class="proj-meta en-i">2020 · FIBER Misr</div>
-      <div class="proj-meta ar-i" style="display:none">2020 · FIBER Misr</div>
-    </div>
-    <div class="proj-card" data-year="2020-2023" data-company="FIBER Misr">
-      <div class="proj-title en-i">Ministry of Electricity & Renewable Energy — FIBER Misr</div>
-      <div class="proj-title ar-i" style="display:none">وزارة الكهرباء والطاقة المتجددة — FIBER Misr</div>
-      <div class="proj-meta en-i">2020 · FIBER Misr</div>
-      <div class="proj-meta ar-i" style="display:none">2020 · FIBER Misr</div>
-    </div>
-    <div class="proj-card" data-year="2020-2023" data-company="FIBER Misr">
-      <div class="proj-title en-i">Ministry of Health & Population — FIBER Misr</div>
-      <div class="proj-title ar-i" style="display:none">وزارة الصحة والسكان — FIBER Misr</div>
-      <div class="proj-meta en-i">2021 · FIBER Misr</div>
-      <div class="proj-meta ar-i" style="display:none">2021 · FIBER Misr</div>
-    </div>
-    <div class="proj-card" data-year="2020-2023" data-company="Nordex">
-      <div class="proj-title en-i">Military Entity — Phase 1 — Nordex (TPC)</div>
-      <div class="proj-title ar-i" style="display:none">الكيان العسكري المرحلة الأولى — Nordex(TPC)</div>
-      <div class="proj-meta en-i">2020/2022 · Nordex</div>
-      <div class="proj-meta ar-i" style="display:none">2020/2022 · Nordex</div>
-    </div>
-    <div class="proj-card" data-year="2020-2023" data-company="ElRowad">
-      <div class="proj-title en-i">Ministry of Awqaf (Administrative Capital) — ElRowad</div>
-      <div class="proj-title ar-i" style="display:none">وزارة الأوقاف (العاصمة الإدارية) — الرواد</div>
-      <div class="proj-meta en-i">2021 · ElRowad</div>
-      <div class="proj-meta ar-i" style="display:none">2021 · الرواد</div>
-    </div>
-    <div class="proj-card" data-year="2020-2023" data-company="Orascom">
-      <div class="proj-title en-i">Kent College West Cairo — Orascom Group</div>
-      <div class="proj-title ar-i" style="display:none">Kent College West Cairo — Orascom Group</div>
-      <div class="proj-meta en-i">2022 · Orascom</div>
-      <div class="proj-meta ar-i" style="display:none">2022 · Orascom</div>
-    </div>
-    <div class="proj-card" data-year="2020-2023" data-company="TATAS">
-      <div class="proj-title en-i">Colleges & Institutes (Military Entity) — TATAS</div>
-      <div class="proj-title ar-i" style="display:none">الكليات والمعاهد (الكيان العسكري) — TATAS</div>
-      <div class="proj-meta en-i">2023 · TATAS</div>
-      <div class="proj-meta ar-i" style="display:none">2023 · TATAS</div>
-    </div>
-
-    <!-- Group 3 (2023) — TeleTech / ACT / Raya -->
-    <div class="proj-card" data-year="2023" data-company="TeleTech">
-      <div class="proj-title en-i">Colleges & Institutes (Military Entity) — TeleTech</div>
-      <div class="proj-title ar-i" style="display:none">الكليات والمعاهد (الكيان العسكري) — TeleTech</div>
-      <div class="proj-meta en-i">2023 · TeleTech</div>
-      <div class="proj-meta ar-i" style="display:none">2023 · TeleTech</div>
-    </div>
-    <div class="proj-card" data-year="2023" data-company="ACT">
-      <div class="proj-title en-i">Medical Complex (Suez) — ACT</div>
-      <div class="proj-title ar-i" style="display:none">مجمع طبي (السويس) — ACT</div>
-      <div class="proj-meta en-i">2023 · ACT</div>
-      <div class="proj-meta ar-i" style="display:none">2023 · ACT</div>
-    </div>
-    <div class="proj-card" data-year="2023" data-company="Alaa Saber">
-      <div class="proj-title en-i">National University (Suez) — Alaa Saber</div>
-      <div class="proj-title ar-i" style="display:none">الجامعة الأهلية (السويس) — علاء صابر</div>
-      <div class="proj-meta en-i">2023 · Alaa Saber</div>
-      <div class="proj-meta ar-i" style="display:none">2023 · علاء صابر</div>
-    </div>
-    <div class="proj-card" data-year="2023" data-company="Raya">
-      <div class="proj-title en-i">National Bank Branch (Cairo — Giza) — Raya</div>
-      <div class="proj-title ar-i" style="display:none">فرع البنك الأهلي (القاهرة — الجيزة) — Raya</div>
-      <div class="proj-meta en-i">2023 · Raya</div>
-      <div class="proj-meta ar-i" style="display:none">2023 · Raya</div>
+  <!-- ══ SYSTEMS BANNER (DYNAMIC HORIZONTAL RIBBON) ══ -->
+  <div class="banner" id="banner-trigger">
+    <div class="banner-head en">Full Light Current<br>Network Coverage</div>
+    <div class="banner-head ar">تغطية شاملة لجميع<br>منظومات التيار الخفيف</div>
+    <div class="banner-pills">
+      <div class="sys-pill">♻ All LV Networks</div>
+      <div class="sys-pill">BMS Platforms</div>
+      <div class="sys-pill">UTB Networks</div>
+      <div class="sys-pill">RMS Integration</div>
+      <div class="sys-pill">Fiber Infrastructure</div>
+      <div class="sys-pill">Smart Facilities</div>
     </div>
   </div>
 
-  
-</section>
+  <!-- ══ PARTNERS ══ -->
+  <section class="partners" id="partners">
+    <div class="partners-grid">
+      <div>
+        <div class="sec-eyebrow"><span class="en-i">Certified Brands</span><span class="ar-i">شركاء النجاح</span></div>
+        <h2 class="sec-title">
+          <span class="en-i">Hardware we <em>Deploy</em></span>
+          <span class="ar-i">علامات تجارية <em>نعتمدها</em></span>
+        </h2>
+        <p class="partners-side-desc en">We partner exclusively with verified international tech developers to secure reliability, hardware compliance, and extended lifecycle support.</p>
+        <p class="partners-side-desc ar">نحن نوفر ونثبت منتجات من شركات عالمية معتمدة لضمان الجودة الفائقة وعمر تشغيلي أطول للأنظمة.</p>
+      </div>
 
-<!-- ══ SYSTEMS BANNER ══ -->
-<div class="banner">
-  <div class="banner-head en">Full Light Current<br>Network Coverage</div>
-  <div class="banner-head ar" style="display:none">تغطية شاملة<br>لشبكات التيار الخفيف</div>
-  <div class="banner-pills">
-    <div class="sys-pill"><span class="en-i">♻ All LV Networks</span><span class="ar-i">♻ جميع شبكات LV</span></div>
-    <div class="sys-pill">RMS</div>
-    <div class="sys-pill">BMS</div>
-    <div class="sys-pill">UTB</div>
-    <div class="sys-pill"><span class="en-i">Fiber Optic</span><span class="ar-i">ألياف ضوئية</span></div>
-    <div class="sys-pill"><span class="en-i">Fire Sight</span><span class="ar-i">Fire Sight</span></div>
-    <div class="sys-pill"><span class="en-i">Smart Building</span><span class="ar-i">مبنى ذكي</span></div>
-  </div>
-</div>
+      <div>
+        <!-- Cat 1 -->
+        <div class="pcat">
+          <div class="pcat-name en">Networking &amp; Active Equipment</div>
+          <div class="pcat-name ar">معدات الشبكات النشطة والتحكم</div>
+          <div class="prow">
+            <div class="pchip"><span class="pchip-dot"></span>Cisco Systems</div>
+            <div class="pchip"><span class="pchip-dot"></span>Huawei</div>
+            <div class="pchip"><span class="pchip-dot"></span>Aruba (HPE)</div>
+          </div>
+        </div>
 
-<!-- ══ PARTNERS ══ -->
-<section class="partners" id="partners">
-  <div class="partners-grid">
-    <div>
-      <div class="sec-eyebrow"><span class="en-i">Partners</span><span class="ar-i">الشركاء</span></div>
-      <h2 class="sec-title">
-        <span class="en-i">Brands We <em>Trust</em></span>
-        <span class="ar-i">علامات <em>نثق</em> بها</span>
-      </h2>
-      <p class="partners-side-desc en">We supply and install exclusively from internationally certified manufacturers — vetted for performance, after-sales support and long-term availability.</p>
-      <p class="partners-side-desc ar" style="display:none">نتعامل توريدًا وتركيبًا حصريًا مع مصنّعين معتمدين دوليًا — تم التحقق منهم في الأداء ودعم ما بعد البيع.</p>
-    </div>
-    <div>
-      <div class="pcat" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.66s, transform 0.5s 0.66s;">
-        <div class="pcat-name en">Networking &amp; Active Equipment</div>
-        <div class="pcat-name ar" style="display:none">الشبكات والمعدات النشطة</div>
-        <div class="prow">
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.69s, transform 0.5s 0.69s;"><span class="pchip-dot"></span>Cisco</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.72s, transform 0.5s 0.72s;"><span class="pchip-dot"></span>Huawei</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.75s, transform 0.5s 0.75s;"><span class="pchip-dot"></span>Aruba (HPE)</div>
+        <!-- Cat 2 -->
+        <div class="pcat">
+          <div class="pcat-name en">Security &amp; Smart Access</div>
+          <div class="pcat-name ar">الأنظمة الأمنية والتحكم بالدخول</div>
+          <div class="prow">
+            <div class="pchip"><span class="pchip-dot"></span>Hikvision</div>
+            <div class="pchip"><span class="pchip-dot"></span>Dahua Technology</div>
+            <div class="pchip"><span class="pchip-dot"></span>UNV</div>
+            <div class="pchip"><span class="pchip-dot"></span>ZKTeco</div>
+          </div>
         </div>
-      </div>
-      <div class="pcat" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.78s, transform 0.5s 0.78s;">
-        <div class="pcat-name en">Security &amp; Surveillance</div>
-        <div class="pcat-name ar" style="display:none">الأمن والمراقبة</div>
-        <div class="prow">
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.81s, transform 0.5s 0.81s;"><span class="pchip-dot"></span>Hikvision</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.84s, transform 0.5s 0.84s;"><span class="pchip-dot"></span>Dahua</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.87s, transform 0.5s 0.87s;"><span class="pchip-dot"></span>UNV</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.9s, transform 0.5s 0.9s;"><span class="pchip-dot"></span>ZKTeco</div>
+
+        <!-- Cat 3 -->
+        <div class="pcat">
+          <div class="pcat-name en">Telephony &amp; Voice Systems</div>
+          <div class="pcat-name ar">الاتصالات والشبكات الصوتية</div>
+          <div class="prow">
+            <div class="pchip"><span class="pchip-dot"></span>Grandstream</div>
+            <div class="pchip"><span class="pchip-dot"></span>Q-Serve</div>
+          </div>
         </div>
-      </div>
-      <div class="pcat" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.93s, transform 0.5s 0.93s;">
-        <div class="pcat-name en">Communications</div>
-        <div class="pcat-name ar" style="display:none">الاتصالات</div>
-        <div class="prow">
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.96s, transform 0.5s 0.96s;"><span class="pchip-dot"></span>Grandstream</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 0.99s, transform 0.5s 0.99s;"><span class="pchip-dot"></span>Q-Serve</div>
+
+        <!-- Cat 4 -->
+        <div class="pcat">
+          <div class="pcat-name en">Wiring Devices &amp; Electrical</div>
+          <div class="pcat-name ar">المقابس الكهربائية والتوصيلات</div>
+          <div class="prow">
+            <div class="pchip"><span class="pchip-dot"></span>Gewiss</div>
+            <div class="pchip"><span class="pchip-dot"></span>Legrand</div>
+            <div class="pchip"><span class="pchip-dot"></span>Bticino</div>
+            <div class="pchip"><span class="pchip-dot"></span>MK Electric</div>
+            <div class="pchip"><span class="pchip-dot"></span>Simon</div>
+          </div>
         </div>
-      </div>
-      <div class="pcat" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.02s, transform 0.5s 1.02s;">
-        <div class="pcat-name en">Wiring Devices &amp; Electrical</div>
-        <div class="pcat-name ar" style="display:none">أجهزة التوصيل والكهرباء</div>
-        <div class="prow">
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.05s, transform 0.5s 1.05s;"><span class="pchip-dot"></span>Gewiss</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.08s, transform 0.5s 1.08s;"><span class="pchip-dot"></span>Legrand</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.11s, transform 0.5s 1.11s;"><span class="pchip-dot"></span>Bticino</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.14s, transform 0.5s 1.14s;"><span class="pchip-dot"></span>MK Electric</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.17s, transform 0.5s 1.17s;"><span class="pchip-dot"></span>Simon</div>
-        </div>
-      </div>
-      <div class="pcat" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.2s, transform 0.5s 1.2s;">
-        <div class="pcat-name en">Structured Cabling &amp; Cables</div>
-        <div class="pcat-name ar" style="display:none">التوصيل المنظم والكابلات</div>
-        <div class="prow">
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.23s, transform 0.5s 1.23s;"><span class="pchip-dot"></span>Panduit</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.26s, transform 0.5s 1.26s;"><span class="pchip-dot"></span>R&amp;M</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.29s, transform 0.5s 1.29s;"><span class="pchip-dot"></span>Datawire</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.32s, transform 0.5s 1.32s;"><span class="pchip-dot"></span>Mesc</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.35s, transform 0.5s 1.35s;"><span class="pchip-dot"></span>Oren</div>
-          <div class="pchip" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.38s, transform 0.5s 1.38s;"><span class="pchip-dot"></span>Fumo</div>
+
+        <!-- Cat 5 -->
+        <div class="pcat">
+          <div class="pcat-name en">Structured Cabling &amp; Connectivity</div>
+          <div class="pcat-name ar">أنظمة كابلات الربط المنظم</div>
+          <div class="prow">
+            <div class="pchip"><span class="pchip-dot"></span>Panduit</div>
+            <div class="pchip"><span class="pchip-dot"></span>R&amp;M</div>
+            <div class="pchip"><span class="pchip-dot"></span>Datawire</div>
+            <div class="pchip"><span class="pchip-dot"></span>Mesc Cables</div>
+            <div class="pchip"><span class="pchip-dot"></span>Oren</div>
+            <div class="pchip"><span class="pchip-dot"></span>Fumo</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
+  <div class="divider"></div>
 
-<!-- ══ CONTACT ══ -->
-<section class="contact" id="contact">
-  <div class="sec-eyebrow"><span class="en-i">Get in Touch</span><span class="ar-i">تواصل معنا</span></div>
-  <h2 class="sec-title">
-    <span class="en-i">Contact <em>Us</em></span>
-    <span class="ar-i"><em>تواصل</em> معنا</span>
-  </h2>
+  <!-- ══ CONTACT & COMMUNICATIONS (RESTRUCTURED) ══ -->
+  <section class="contact" id="contact">
+    <div class="sec-eyebrow"><span class="en-i">Communications</span><span class="ar-i">قنوات الاتصال</span></div>
+    <h2 class="sec-title">
+      <span class="en-i">Corporate <em>Directory</em></span>
+      <span class="ar-i">دليل <em>التواصل</em> المباشر</span>
+    </h2>
 
-  <div class="contact-grid">
-    <div class="c-list">
-      <div class="ci" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.41s, transform 0.5s 1.41s;">
-        <div class="ci-icon">📍</div>
-        <div>
-          <div class="ci-lbl en">Head Office</div><div class="ci-lbl ar" style="display:none">المقر الرئيسي</div>
-          <div class="ci-val en">Maadi, Cairo, Egypt</div><div class="ci-val ar" style="display:none">المعادي، القاهرة، مصر</div>
+    <div class="contact-grid">
+      <!-- Left Column: Location & General Channels (Optimized Grid Items) -->
+      <div class="c-list">
+        <!-- L1 -->
+        <div class="ci-card">
+          <div class="ci-icon">📍</div>
+          <div class="ci-details">
+            <div class="ci-lbl en">Head Office</div>
+            <div class="ci-lbl ar">المقر الرئيسي</div>
+            <div class="ci-val en">Maadi, Cairo, Egypt</div>
+            <div class="ci-val ar">المعادي، القاهرة، مصر</div>
+          </div>
+        </div>
+        <!-- L2 -->
+        <div class="ci-card">
+          <div class="ci-icon">🏢</div>
+          <div class="ci-details">
+            <div class="ci-lbl en">Site Office</div>
+            <div class="ci-lbl ar">مكتب الموقع</div>
+            <div class="ci-val en">Police Man City, Hdaek Helwan 77, 3</div>
+            <div class="ci-val ar">مدينة رجال الشرطة، حدائق حلوان، ٧٧، ٣</div>
+          </div>
+        </div>
+        <!-- L3 -->
+        <div class="ci-card">
+          <div class="ci-icon">🏬</div>
+          <div class="ci-details">
+            <div class="ci-lbl en">Central Warehouses</div>
+            <div class="ci-lbl ar">مخازن الشركة</div>
+            <div class="ci-val en">Helwan Industrial Area, Cairo</div>
+            <div class="ci-val ar">المنطقة الصناعية بحلوان، القاهرة</div>
+          </div>
+        </div>
+        <!-- L4 -->
+        <div class="ci-card">
+          <div class="ci-icon">💬</div>
+          <div class="ci-details">
+            <div class="ci-lbl en">WhatsApp Business</div>
+            <div class="ci-lbl ar">واتساب الأعمال</div>
+            <div class="ci-val">
+              <a href="https://wa.me/201010998027" target="_blank" class="magnetic-btn" style="color: var(--blue); font-weight:700;">01010998027</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="ci" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.44s, transform 0.5s 1.44s;">
-        <div class="ci-icon">🏗️</div>
-        <div>
-          <div class="ci-lbl en">Site Office</div><div class="ci-lbl ar" style="display:none">مكتب الموقع</div>
-          <div class="ci-val en">Police Man City, Hdaek Helwan 77, 3</div><div class="ci-val ar" style="display:none">مدينة رجال الشرطة، حدائق حلوان ٧٧، ٣</div>
+
+      <!-- Right Column: Dual-Profile Executive Grid -->
+      <div class="executive-showcase">
+        <!-- CARD 1: GENERAL MANAGER (NEW) -->
+        <div class="person-card gm-accent">
+          <div>
+            <div class="person-pill en">General Manager · 3ACo</div>
+            <div class="person-pill ar">المدير العام · 3ACo</div>
+            <div class="person-name en">Ibrahim Shoaib</div>
+            <div class="person-name ar">أ. إبراهيم شعيب</div>
+          </div>
+          
+          <div class="person-contacts">
+            <a href="tel:01033063211" class="pcl">
+              <span>📞</span><span>01033063211</span>
+            </a>
+            <div class="pcl">
+              <span>📍</span>
+              <span class="en-i">Maadi · Cairo · Egypt</span>
+              <span class="ar-i">المعادي · القاهرة · مصر</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: PROJECT MANAGER -->
+        <div class="person-card">
+          <div>
+            <div class="person-pill en">Project Manager · 3ACo</div>
+            <div class="person-pill ar">مدير المشاريع · 3ACo</div>
+            <div class="person-name en">Abdelrhman El-Hawary</div>
+            <div class="person-name ar">م. عبد الرحمن الهواري</div>
+          </div>
+          
+          <div class="person-contacts">
+            <a href="tel:01117874632" class="pcl">
+              <span>📞</span><span>01117874632</span>
+            </a>
+            <a href="mailto:elhwarya139@gmail.com" class="pcl">
+              <span>✉️</span><span>elhwarya139@gmail.com</span>
+            </a>
+            <div class="pcl">
+              <span>📍</span>
+              <span class="en-i">Maadi · Cairo · Egypt</span>
+              <span class="ar-i">المعادي · القاهرة · مصر</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="ci" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.47s, transform 0.5s 1.47s;">
-        <div class="ci-icon">🏭</div>
-        <div>
-          <div class="ci-lbl en">Stores</div><div class="ci-lbl ar" style="display:none">المخازن</div>
-          <div class="ci-val en">Helwan, Cairo</div><div class="ci-val ar" style="display:none">حلوان، القاهرة</div>
-        </div>
-      </div>
-      <div class="ci" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s 1.5s, transform 0.5s 1.5s;">
-        <div class="ci-icon">💬</div>
-        <div>
-          <div class="ci-lbl en">Al-Hawari — WhatsApp</div><div class="ci-lbl ar" style="display:none">الهواري — واتساب</div>
-          <div class="ci-val">01010998027</div>
-        </div>
-      </div>
-      
     </div>
+  </section>
 
-    <div class="person-card">
-      <div class="person-pill en">Project Manager · 3ACo Egypt</div>
-      <div class="person-pill ar" style="display:none">مدير المشروع · 3ACo مصر</div>
-      <div class="person-name en">Abdelrhman El-Hawary</div>
-      <div class="person-name ar" style="display:none">عبد الرحمن الهواري</div>
-      <div class="person-contacts">
-        <div class="pcl"><span>📞</span><span>01117874632</span></div>
-        <div class="pcl"><span>✉️</span><span>elhwarya139@gmail.com</span></div>
-        <div class="pcl">
-          <span>📍</span>
-          <span class="en-i">Maadi · Cairo · Egypt</span>
-          <span class="ar-i">المعادي · القاهرة · مصر</span>
-        </div>
-      </div>
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-brand"><b>3</b>ACo</div>
+    <div class="footer-motto">
+      <span class="en-i">Active · Accurate · Advanced</span>
+      <span class="ar-i">نشط · دقيق · متقدم</span>
     </div>
-    <div class="person-card" style="margin-top:18px;">
-      <div class="person-pill en"> General Manager · 3ACo Egypt</div>
-      <div class="person-pill ar" style="display:none">مدير عام · 3ACo مصر</div>
-      <div class="person-name en">Ibrahim Shuaib</div>
-      <div class="person-name ar" style="display:none">ابراهيم شعيب</div>
-      <div class="person-contacts">
-        <div class="pcl"><span>📞</span><span>01033063211</span></div>
-        <div class="pcl">
-          <span>📍</span>
-          <span class="en-i">Maadi · Cairo · Egypt</span>
-          <span class="ar-i">المعادي · القاهرة · مصر</span>
-        </div>
-      </div>
+    <div class="footer-copy">
+      <span class="en-i">3ACo for Services Engineering and Supplies · Cairo, Egypt</span>
+      <span class="ar-i">3ACo للخدمات الهندسية والتوريدات · القاهرة، مصر</span>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- ══ FOOTER ══ -->
-<footer>
-  <div class="footer-brand"><b>3</b>ACo</div>
-  <div class="footer-motto">
-    <span class="en-i">Active · Accurate · Advanced</span>
-    <span class="ar-i">نشط · دقيق · متقدم</span>
-  </div>
-  <div class="footer-copy">
-    <span class="en-i">3ACo for Services Engineering and Supplies · Cairo, Egypt</span>
-    <span class="ar-i">3ACo للخدمات الهندسية والتوريدات · القاهرة، مصر</span>
-  </div>
-</footer>
+  <!-- ════════════════════════════════════
+       LIBRARIES & SCRIPTS (via CDN)
+  ════════════════════════════════════ -->
+  <!-- Three.js (r128) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP 3 & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-<script>
-const html = document.documentElement;
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
 
-function toggleTheme() {
-  const dark = html.dataset.theme === 'dark';
-  html.dataset.theme = dark ? 'light' : 'dark';
-  document.getElementById('themeBtn').textContent = dark ? '🌙' : '☀️';
-  localStorage.setItem('3aco-theme', html.dataset.theme);
-}
+    /* ════════════════════════════════════
+       THEME MANAGEMENT & PRESET STATE
+    ════════════════════════════════════ */
+    const docHtml = document.documentElement;
 
-function setLang(lang) {
-  html.dataset.lang = lang;
-  html.lang = lang;
-  html.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-  document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
-  localStorage.setItem('3aco-lang', lang);
-}
-
-(function() {
-  const theme = localStorage.getItem('3aco-theme') || 'dark';
-  const lang  = localStorage.getItem('3aco-lang')  || 'en';
-  html.dataset.theme = theme;
-  document.getElementById('themeBtn').textContent = theme === 'dark' ? '🌙' : '☀️';
-  if (lang !== 'en') setLang(lang);
-})();
-
-/* scroll fade-in */
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.opacity = '1';
-      e.target.style.transform = 'translateY(0)';
-      obs.unobserve(e.target);
+    function changeTheme() {
+      const isDark = docHtml.dataset.theme === 'dark';
+      const nextTheme = isDark ? 'light' : 'dark';
+      docHtml.dataset.theme = nextTheme;
+      document.getElementById('theme-toggler').textContent = nextTheme === 'dark' ? '🌙' : '☀️';
+      localStorage.setItem('3aco-theme', nextTheme);
     }
-  });
-}, { threshold: 0.06 });
 
-document.querySelectorAll('.sc, .value-row, .pchip, .ci, .anum, .pcat, .hp').forEach((el, i) => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(16px)';
-  el.style.transition = `opacity 0.5s ease ${i * 0.03}s, transform 0.5s ease ${i * 0.03}s`;
-  obs.observe(el);
-});
+    function switchLanguage(lang) {
+      docHtml.dataset.lang = lang;
+      docHtml.lang = lang;
+      docHtml.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+      localStorage.setItem('3aco-lang', lang);
+    }
 
-/* nav shadow on scroll */
-window.addEventListener('scroll', () => {
-  document.querySelector('nav').style.boxShadow =
-    window.scrollY > 12 ? '0 1px 20px rgba(0,0,0,0.15)' : 'none';
-}, { passive: true });
-</script>
+    // Initialize state
+    (function initAppState() {
+      const localTheme = localStorage.getItem('3aco-theme') || 'dark';
+      const localLang = localStorage.getItem('3aco-lang') || 'en';
+      docHtml.dataset.theme = localTheme;
+      document.getElementById('theme-toggler').textContent = localTheme === 'dark' ? '🌙' : '☀️';
+      switchLanguage(localLang);
+    })();
 
+    /* ════════════════════════════════════
+       AMBIENT GRADIENT & INTERACTIVE CURSOR
+    ════════════════════════════════════ */
+    const cursor = document.getElementById('custom-cursor');
+    const meshBg = document.getElementById('ambient-mesh');
+    let mX = window.innerWidth / 2;
+    let mY = window.innerHeight / 2;
+    let cX = mX;
+    let cY = mY;
 
-</body></html>
+    window.addEventListener('mousemove', (e) => {
+      mX = e.clientX;
+      mY = e.clientY;
+      cursor.style.opacity = '1';
+    });
+
+    window.addEventListener('mouseout', () => {
+      cursor.style.opacity = '0';
+    });
+
+    // Custom cursor lerp interpolation
+    function animateCursor() {
+      cX += (mX - cX) * 0.15;
+      cY += (mY - cY) * 0.15;
+      cursor.style.left = `${cX}px`;
+      cursor.style.top = `${cY}px`;
+      
+      // Ambient shift of gradient backgrounds based on cursor
+      const pctX = (cX / window.innerWidth) * 100;
+      const pctY = (cY / window.innerHeight) * 100;
+      meshBg.style.background = `radial-gradient(circle at ${pctX}% ${pctY}%, var(--blue-soft) 0%, transparent 45%),
+                                 radial-gradient(circle at ${100 - pctX}% ${100 - pctY}%, rgba(200, 169, 110, 0.02) 0%, transparent 45%)`;
+      
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    /* ════════════════════════════════════
+       THREE.JS: PROCEDURAL WIREFRAME & PARTICLE SCENE
+    ════════════════════════════════════ */
+    const canvas = document.getElementById('hero-canvas');
+    const scene = new THREE.Scene();
+    
+    // Camera Setup
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = 18;
+
+    // Renderer Setup
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    const blueColorVal = 0x1a9fd4;
+
+    // 1. Procedural Smart Building Wireframe Stack [1]
+    const buildingGroup = new THREE.Group();
+    const frameMaterial = new THREE.LineBasicMaterial({
+      color: blueColorVal,
+      transparent: true,
+      opacity: 0.15
+    });
+
+    // Building Floors / Tiers
+    const tierGeometries = [
+      new THREE.BoxGeometry(4, 3, 4, 3, 2, 3),
+      new THREE.BoxGeometry(3.2, 4, 3.2, 3, 3, 3),
+      new THREE.BoxGeometry(2.4, 3, 2.4, 2, 2, 2)
+    ];
+
+    const tiers = [];
+    let heightOffset = -2;
+    tierGeometries.forEach((geom, idx) => {
+      const edges = new THREE.EdgesGeometry(geom);
+      const wireframe = new THREE.LineSegments(edges, frameMaterial);
+      wireframe.position.y = heightOffset + (idx * 2.5);
+      buildingGroup.add(wireframe);
+      tiers.push(wireframe);
+    });
+
+    buildingGroup.position.x = 4; // Shift right to place naturally behind content space
+    scene.add(buildingGroup);
+
+    // 2. Interactive Reactive Particle Field [1]
+    const particleCount = 220;
+    const particleGeometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const speedFactors = new Float32Array(particleCount);
+
+    for (let i = 0; i < particleCount * 3; i += 3) {
+      positions[i] = (Math.random() - 0.5) * 25;     // X axis
+      positions[i + 1] = (Math.random() - 0.5) * 20; // Y axis
+      positions[i + 2] = (Math.random() - 0.5) * 15; // Z axis
+      speedFactors[i / 3] = 0.01 + Math.random() * 0.02;
+    }
+
+    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    // Simple custom circular particle canvas texture [1]
+    const canvasTexture = document.createElement('canvas');
+    canvasTexture.width = 16;
+    canvasTexture.height = 16;
+    const ctxTexture = canvasTexture.getContext('2d');
+    const grad = ctxTexture.createRadialGradient(8, 8, 0, 8, 8, 8);
+    grad.addColorStop(0, 'rgba(26,159,212,1)');
+    grad.addColorStop(1, 'rgba(26,159,212,0)');
+    ctxTexture.fillStyle = grad;
+    ctxTexture.fillRect(0, 0, 16, 16);
+    const pTexture = new THREE.CanvasTexture(canvasTexture);
+
+    const particleMaterial = new THREE.PointsMaterial({
+      size: 0.4,
+      map: pTexture,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      opacity: 0.8,
+      depthWrite: false
+    });
+
+    const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+    scene.add(particleSystem);
+
+    let targetX = 0;
+    let targetY = 0;
+    const normMouse = { x: 0, y: 0 };
+
+    window.addEventListener('mousemove', (e) => {
+      normMouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      normMouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // 3D Render Loop
+    const clock = new THREE.Clock();
+    function animateScene() {
+      const elapsed = clock.getElapsedTime();
+
+      // Rotating wireframe
+      buildingGroup.rotation.y = elapsed * 0.05;
+      
+      // Individual structural oscillations
+      tiers.forEach((tier, i) => {
+        tier.rotation.x = Math.sin(elapsed * 0.2 + i) * 0.03;
+      });
+
+      // Target camera coordinates relative to mouse coords (Parallax Depth Layering) [1]
+      targetX += (normMouse.x * 3 - targetX) * 0.05;
+      targetY += (normMouse.y * 2 - targetY) * 0.05;
+      buildingGroup.position.x = 4 + (targetX * 0.8);
+      buildingGroup.position.y = (targetY * 0.8);
+
+      // Particle physics float system
+      const posArr = particleGeometry.attributes.position.array;
+      for (let i = 0; i < particleCount; i++) {
+        const idx = i * 3;
+        posArr[idx + 1] += speedFactors[i];
+        posArr[idx] += Math.sin(elapsed + i) * 0.003;
+
+        if (posArr[idx + 1] > 10) {
+          posArr[idx + 1] = -10;
+          posArr[idx] = (Math.random() - 0.5) * 25;
+        }
+      }
+      particleGeometry.attributes.position.needsUpdate = true;
+      particleSystem.rotation.y = elapsed * 0.02;
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(animateScene);
+    }
+    animateScene();
+
+    /* ════════════════════════════════════
+       MAGNETIC INTERACTION PHYSICS
+    ════════════════════════════════════ */
+    document.querySelectorAll('.magnetic-btn').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const bounds = btn.getBoundingClientRect();
+        const bX = e.clientX - bounds.left - bounds.width / 2;
+        const bY = e.clientY - bounds.top - bounds.height / 2;
+        
+        gsap.to(btn, {
+          x: bX * 0.35,
+          y: bY * 0.35,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: "elastic.out(1, 0.3)"
+        });
+      });
+    });
+
+    /* ════════════════════════════════════
+       3D PERSPECTIVE TILT EXPERIENCES
+    ════════════════════════════════════ */
+    document.querySelectorAll('.sc, .person-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const cBounds = card.getBoundingClientRect();
+        const mouseCardX = e.clientX - cBounds.left;
+        const mouseCardY = e.clientY - cBounds.top;
+
+        const rotateX = -((mouseCardY - cBounds.height / 2) / (cBounds.height / 2)) * 8;
+        const rotateY = ((mouseCardX - cBounds.width / 2) / (cBounds.width / 2)) * 8;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        card.style.boxShadow = `${-rotateY * 2.5}px ${rotateX * 2.5}px 25px rgba(26, 159, 212, 0.08)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        card.style.boxShadow = `var(--shadow)`;
+      });
+    });
+
+    /* ════════════════════════════════════
+       GSAP SCROLLTRIGGER ENGINE
+    ════════════════════════════════════ */
+    window.addEventListener('scroll', () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / scrollHeight) * 100;
+      document.getElementById('pBar').style.width = `${progress}%`;
+    });
+
+    window.addEventListener('load', () => {
+      gsap.timeline()
+        .from(".hero-kicker", { opacity: 0, y: 30, duration: 0.8, ease: "power3.out" })
+        .from(".hero-h1", { opacity: 0, y: 40, duration: 1, ease: "power3.out" }, "-=0.6")
+        .from(".hero-desc", { opacity: 0, y: 30, duration: 0.8, ease: "power3.out" }, "-=0.7")
+        .from(".hero-ctas", { opacity: 0, y: 20, duration: 0.6, ease: "power3.out" }, "-=0.6")
+        .from(".hero-pillars .hp", { opacity: 0, y: 30, stagger: 0.15, duration: 0.8, ease: "power3.out" }, "-=0.5");
+    });
+
+    const sections = ['#about', '#services', '#partners', '#contact'];
+    sections.forEach(secId => {
+      gsap.from(`${secId} .sec-eyebrow, ${secId} .sec-title, ${secId} .about-copy, ${secId} .value-list, ${secId} .svc-grid, ${secId} .partners-grid, ${secId} .contact-grid`, {
+        scrollTrigger: {
+          trigger: secId,
+          start: "top 78%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power2.out"
+      });
+    });
+
+    gsap.from(".about-nums", {
+      scrollTrigger: {
+        trigger: ".about-nums",
+        start: "top 80%",
+        onEnter: () => {
+          document.querySelectorAll('.anum-n').forEach(num => {
+            const val = parseInt(num.getAttribute('data-val'), 10);
+            if (!isNaN(val)) {
+              let current = 0;
+              const interval = setInterval(() => {
+                current += Math.ceil(val / 15);
+                if (current >= val) {
+                  current = val;
+                  clearInterval(interval);
+                }
+                num.innerHTML = `${current}<b>+</b>`;
+              }, 40);
+            }
+          });
+        }
+      }
+    });
+
+    gsap.from(".banner-pills .sys-pill", {
+      scrollTrigger: {
+        trigger: "#banner-trigger",
+        start: "top 85%",
+        toggleActions: "play none none none"
+      },
+      x: (i) => i % 2 === 0 ? -60 : 60,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 1,
+      ease: "power3.out"
+    });
+  </script>
+</body>
+</html>
