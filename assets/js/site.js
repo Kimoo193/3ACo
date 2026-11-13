@@ -195,16 +195,27 @@
     var c = navigator.connection;
     if (c && (c.saveData || /(^|-)2g$/.test(c.effectiveType || ""))) return false;
     if (navigator.deviceMemory && navigator.deviceMemory < 4) return false;
-    try { var t = document.createElement("canvas"); return !!(t.getContext("webgl2") || t.getContext("webgl")); } catch (e) { return false; }
+    try {
+      var t = document.createElement("canvas"), gl = t.getContext("webgl2") || t.getContext("webgl");
+      if (!gl) return false;
+      // no real GPU (software rasteriser): the film would run on the CPU and freeze the page, so keep the poster
+      var dbg = gl.getExtension("WEBGL_debug_renderer_info");
+      var r = dbg ? String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL)) : "";
+      return /[?&]cine=/.test(location.search) || !/swiftshader|llvmpipe|softpipe|software|basic render/i.test(r);
+    } catch (e) { return false; }
   }
-  function boot3D() {
-    var src = (document.querySelector('script[src*="site.js"]').src).replace(/site\.js(\?[^#]*)?.*$/, "scene3d.js$1");
+  function boot3D(m) {
     var qs = new URLSearchParams(location.search), fz = qs.get("cine");
-    import(src).then(function (m) { m.mount(rack, { freeze: fz !== null ? parseFloat(fz) : undefined, capture: qs.has("bare") }); }).catch(function () { /* poster stays */ });
+    m.mount(rack, { freeze: fz !== null ? parseFloat(fz) : undefined, capture: qs.has("bare") });
   }
   if (can3D()) {
+    // start downloading the cinematic now (in parallel with the page); mount it once the page has loaded
+    var src = (document.querySelector('script[src*="site.js"]').src).replace(/site\.js(\?[^#]*)?.*$/, "scene3d.js$1");
+    var mod = import(src);
     var go = function () {
-      if ("requestIdleCallback" in window) requestIdleCallback(boot3D, { timeout: 1500 }); else setTimeout(boot3D, 300);
+      mod.then(function (m) {
+        if ("requestIdleCallback" in window) requestIdleCallback(function () { boot3D(m); }, { timeout: 600 }); else setTimeout(function () { boot3D(m); }, 50);
+      }).catch(function () { /* poster stays */ });
     };
     if (document.readyState === "complete") go(); else window.addEventListener("load", go, { once: true });
   }

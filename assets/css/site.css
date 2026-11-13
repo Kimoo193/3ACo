@@ -1,5 +1,8 @@
 /* 3A Technology Solution — "inside the tower": the page continues the night cinematic.
    A riser of brand-coloured cables runs down the page; every section is a floor it powers. */
+/* metric-matched fallbacks: text keeps its width while the web fonts load (no layout shift) */
+@font-face { font-family: "Alexandria Fallback"; src: local("Arial Bold"), local("Arial"), local("Liberation Sans Bold"), local("Liberation Sans"), local("Helvetica"); size-adjust: 115%; }
+@font-face { font-family: "Readex Fallback"; src: local("Arial"), local("Liberation Sans"), local("Helvetica"); size-adjust: 107%; }
 :root {
   --night-950: #05070b;
   --night-900: #090c11;
@@ -20,8 +23,8 @@
   --amber: #ffb547;
   --label-ink: #06090d;
 
-  --f-display: "Alexandria", "Readex Pro", system-ui, sans-serif;
-  --f-body: "Readex Pro", system-ui, sans-serif;
+  --f-display: "Alexandria", "Alexandria Fallback", system-ui, sans-serif;
+  --f-body: "Readex Pro", "Readex Fallback", system-ui, sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --gutter: clamp(16px, 4vw, 48px);
