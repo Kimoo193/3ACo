@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kimoo193.github.io/3ACo/sitemap.xml
+Sitemap: https://3asolutions.org/sitemap.xml
