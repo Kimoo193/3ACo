@@ -134,17 +134,17 @@ html.bare .top, html.bare .hero-text, html.bare .cine-shade, html.bare .dock, ht
 .cable.c1 { inset-inline-start: 2px; background: var(--brand); }
 .cable.c2 { inset-inline-start: 8px; background: var(--brand-2); }
 .cable.c3 { inset-inline-start: 14px; background: #dfefff; opacity: .14; }
-.fill { position: absolute; top: 0; inset-inline-start: 0; width: 18px; height: 100%; transform-origin: top; transform: scaleY(var(--p, 0));
+.fill { position: absolute; top: 0; inset-inline-start: 0; width: 18px; height: 100%; transform-origin: top; transform: scaleY(var(--p, 0)); will-change: transform;
   background:
     linear-gradient(var(--brand), var(--brand)) 2px 0 / 2px 100% no-repeat,
+    linear-gradient(rgba(52,198,240,.28), rgba(52,198,240,.28)) 6px 0 / 6px 100% no-repeat,
     linear-gradient(var(--brand-2), var(--brand-2)) 8px 0 / 2px 100% no-repeat,
-    linear-gradient(#dfefff, #dfefff) 14px 0 / 2px 100% no-repeat;
-  filter: drop-shadow(0 0 4px rgba(52,198,240,.55)); }
-[dir="rtl"] .fill { background-position: right 2px top, right 8px top, right 14px top; }
-.fill::after { /* the travelling head of the current */
-  content: ""; position: absolute; bottom: -2px; inset-inline-start: -3px; width: 24px; height: 24px; border-radius: 50%;
-  background: radial-gradient(circle, #fff 0 18%, rgba(52,198,240,.6) 30%, transparent 70%); transform: scaleY(calc(1 / max(var(--p, 1), .02)));
-}
+    linear-gradient(#dfefff, #dfefff) 14px 0 / 2px 100% no-repeat; }
+[dir="rtl"] .fill { background-position: right 2px top, right 6px top, right 8px top, right 14px top; }
+.head { /* the travelling head of the current: moved, never scaled */
+  position: absolute; top: -12px; inset-inline-start: -3px; width: 24px; height: 24px; border-radius: 50%; will-change: transform;
+  transform: translate3d(0, var(--py, 0px), 0);
+  background: radial-gradient(circle, #fff 0 18%, rgba(52,198,240,.6) 30%, transparent 70%); }
 
 .floor { position: relative; padding-block: clamp(72px, 9vw, 120px); }
 .floor + .floor { border-top: 1px solid var(--line); }
@@ -425,6 +425,7 @@ html.bare .top, html.bare .hero-text, html.bare .cine-shade, html.bare .dock, ht
   .ctas .btn-ghost { flex-basis: 100%; }
   .riser { inset-inline-start: 8px; width: 12px; }
   .cable.c3, .fill { width: 12px; }
+  .head { inset-inline-start: -6px; }
   .cable.c3 { display: none; }
   .tap { display: none; }
   .level { grid-template-columns: 1fr; padding: 22px 18px; }

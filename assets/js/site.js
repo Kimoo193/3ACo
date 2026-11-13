@@ -89,14 +89,26 @@
   var top = $(".top"), tower = $("#tower"), lift = $(".lift"), hero = $(".hero");
   var floors = $$(".floor"), liftNo = lift && $(".lift-no", lift), liftName = lift && $(".lift-name", lift);
   var lastY = window.scrollY, cur = null, ticking = false;
+  // the riser current chases the scroll position with an eased follow, so it glides instead of jumping
+  var pTarget = 0, pNow = 0, towerH = 0, easing = false, tPrev = 0;
+  var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function easeRiser(now) {
+    var dt = tPrev ? Math.min(64, now - tPrev) : 16; tPrev = now;
+    var d = pTarget - pNow;
+    pNow = still || Math.abs(d) < 0.0004 ? pTarget : pNow + d * (1 - Math.exp(-dt / 140));
+    tower.style.setProperty("--p", pNow.toFixed(5));
+    tower.style.setProperty("--py", (pNow * towerH).toFixed(1) + "px");
+    if (pNow !== pTarget) requestAnimationFrame(easeRiser); else { easing = false; tPrev = 0; }
+  }
   function onScroll() {
     ticking = false;
     var y = window.scrollY, vh = window.innerHeight;
     if (top) top.classList.toggle("solid", y > 40);
     if (tower) {
       var r = tower.getBoundingClientRect();
-      var p = Math.min(1, Math.max(0, (vh * 0.6 - r.top) / r.height));
-      tower.style.setProperty("--p", p.toFixed(4));
+      pTarget = Math.min(1, Math.max(0, (vh * 0.6 - r.top) / r.height));
+      towerH = r.height;
+      if (!easing) { easing = true; requestAnimationFrame(easeRiser); }
     }
     var mark = vh * 0.45, active = null;
     floors.forEach(function (f) {
