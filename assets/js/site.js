@@ -74,10 +74,10 @@
       if (el.classList.contains("level")) el.classList.add("lit");
       io.unobserve(el);
     });
-  }, { rootMargin: "0px 0px -18% 0px", threshold: 0.15 }) : null;
+  }, { rootMargin: "0px 0px -18% 0px", threshold: 0 }) : null;
 
   if (io) {
-    $$(".sec-head, .directory, .stack, .trail, .badges, .faq-list, .bgrid, .order, .direct").forEach(function (el) { el.classList.add("rv"); io.observe(el); });
+    $$(".sec-head, .directory, .stack, .trail, .apps, .badges, .faq-list, .bgrid, .order, .direct").forEach(function (el) { el.classList.add("rv"); io.observe(el); });
     $$(".meters, .pull").forEach(function (el) { io.observe(el); });
     if (touch) $$(".level").forEach(function (el) { io.observe(el); });
   } else {

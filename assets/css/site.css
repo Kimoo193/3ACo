@@ -450,3 +450,19 @@ html.bare .top, html.bare .hero-text, html.bare .cine-shade, html.bare .dock, ht
   .dock a:first-child .ic { color: var(--live); }
   .dock .dock-q { background: var(--brand); color: var(--label-ink); }
 }
+
+/* ---------- software floor */
+.apps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.app { position: relative; padding: 22px 20px 24px; border: 1px solid var(--line); border-radius: var(--r); background: var(--night-850); transition: border-color .25s, background .25s; }
+.app::before { content: ""; position: absolute; inset-inline: 20px; top: -1px; height: 2px; background: var(--brand-2); opacity: .55; }
+.app:hover { border-color: color-mix(in srgb, var(--brand-2) 45%, var(--line-2)); background: var(--night-800); }
+.app-k { display: inline-block; font-family: var(--f-mono); font-size: .78rem; color: var(--brand-2); padding: 2px 8px; border: 1px solid color-mix(in srgb, var(--brand-2) 40%, transparent); border-radius: 999px; margin-bottom: 14px; }
+.app h3 { font-size: 1.25rem; }
+.app p { color: var(--ink-2); margin-top: 8px; }
+.soft-cta { margin-top: 28px; }
+.stop[data-c="el"] { --c: var(--power); }
+.stop[data-c="bms"] { --c: var(--brand-2); }
+@media (max-width: 1080px) { .apps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .apps { grid-template-columns: 1fr; } }
+@media (900px < width <= 1040px) { .nav a { padding: 8px 8px; font-size: .92rem; } .top-actions .hide-sm { padding-inline: 14px; } }
+@media (900px < width <= 940px) { .top-actions .hide-sm { display: none; } }
